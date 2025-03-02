@@ -47,7 +47,7 @@ export default {
                 username: '',
                 password: ''
             },
-            error: '' // Thêm biến error để lưu thông báo lỗi
+            error: ''
         }
     },
     methods: {
@@ -58,7 +58,7 @@ export default {
             }
 
             try {
-                var url = `${process.env.VUE_APP_BASE_API_URL}/Authentications/Login`;
+                var url = `${process.env.VUE_APP_BASE_API_URL}Auth/AuthController_login`;
                 const response = await axios.post(url, {
                     username: this.loginForm.username,
                     password: this.loginForm.password

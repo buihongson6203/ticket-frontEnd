@@ -10,7 +10,7 @@
                 <div class="left">
                     <h1>Create Category</h1>
                     <ul class="breadcrumb">
-                        
+
                         <li>/</li>
                         <li>
                             <router-link class="active" to="/admin/categorymanage">Back to manage</router-link>
@@ -28,8 +28,9 @@
                         <ul class="form-style-1">
                             <li>
                                 <label>Category Name <span class="required">*</span></label>
-                                <input type="text" name="field1" class="field-long" placeholder="Category Name" v-model="currentCategory.categoryName"/>
-                            </li>                                         
+                                <input type="text" name="name" class="field-long" placeholder="Category Name"
+                                    v-model="currentCategory.name" />
+                            </li>
                             <li>
                             </li>
                         </ul>
@@ -58,22 +59,21 @@ export default {
     data() {
         return {
             currentCategory: {
-                id: 0,
-                categoryName: "Name",
+                name: "Name",
             }
         }
     },
     methods: {
         onCreateClick() {
-            if (this.currentCategory.id == 0) {
-                var url = process.env.VUE_APP_BASE_API_URL + `/Categories/Create`
-                axios.post(url, this.currentCategory).then((respone) => {
-                    console.log(respone.data);
-                    router.push({ name: 'CategoryManageView' });
-                }).catch((error) => {
-                    console.log(error)
-                })
-            }
+
+            var url = process.env.VUE_APP_BASE_API_URL + `/categories`
+            axios.post(url, this.currentCategory).then((respone) => {
+                console.log(respone.data);
+                router.push({ name: 'CategoryManageView' });
+            }).catch((error) => {
+                console.log(error)
+            })
+
         }
     },
     mounted() {
@@ -84,5 +84,4 @@ export default {
 <style scoped>
 @import '@/assets/forminput.css';
 @import '@/assets/style.css';
-
 </style>

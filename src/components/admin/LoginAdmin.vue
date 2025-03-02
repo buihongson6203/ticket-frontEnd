@@ -1,47 +1,18 @@
 <template>
-    <div class="limiter" id="login">
-        <div class="container-login100"
-            style="background-image:url(https://image.freepik.com/free-photo/happy-woman-doing-online-shopping-home_329181-4301.jpg)">
-            <div class="container">
-                <div class="row" style="margin-left: 0px;">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-6" style=" width:auto !important;">
-                        <div class="login_topimg">
-                        </div>
-                        <div class="wrap-login100">
-                            <span style="margin-bottom: 30px" class="login100-form-title "> Login Admin </span>
-                            <form class="login100-form validate-form" @submit.prevent="login" style="margin: auto;">
-                                <div class="wrap-input100 validate-input m-b-16"
-                                    data-validate="Valid email is required: ex@abc.xyz">
-                                    <input class="input100" type="text" id="loginUsername" v-model="loginForm.username"
-                                        placeholder="Username">
-                                    <span class="focus-input100"></span>
-                                    <span class="symbol-input100">
-                                        <span class="glyphicon glyphicon-user"></span>
-                                    </span>
-                                </div>
-                                <div class="wrap-input100 validate-input m-b-16" data-validate="Password is required">
-                                    <input class="input100" type="password" id="loginPassword"
-                                        v-model="loginForm.password" placeholder="Password">
-                                    <span class="focus-input100"></span>
-                                    <span class="symbol-input100">
-                                        <span class="glyphicon glyphicon-lock"></span>
-                                    </span>
-                                </div>
-
-                                <div class="container-login100-form-btn p-t-25">
-                                    <button type="submit" class="login100-form-btn">Login</button>
-                                </div>
-                                <!-- Hiển thị thông báo khi đăng nhập không thành công -->
-                                <div style="text-align: center; width: 100%; margin: 0 auto; margin-top: 10px" v-if="error" class="alert alert-danger mt-3" role="alert">
-                                    {{ error }}
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-md-3"></div>
+    <div class="login-container">
+        <div class="login-box">
+            <h2 class="login-title">Login Admin</h2>
+            <form class="login-form" @submit.prevent="login">
+                <div class="input-group">
+                    <input type="text" id="loginEmail" v-model="loginForm.email" placeholder="Email" required>
                 </div>
-            </div>
+                <div class="input-group">
+                    <input type="password" id="loginPassword" v-model="loginForm.password" placeholder="Password"
+                        required>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+                <div v-if="error" class="error-message">{{ error }}</div>
+            </form>
         </div>
     </div>
 </template>
@@ -56,35 +27,33 @@ export default {
     data() {
         return {
             loginForm: {
-                username: '',
-                password: ''
+                email: '',
+                password: '',
             },
-            error: '' // Thêm biến error để lưu thông báo lỗi
+            error: ''
         };
     },
     methods: {
         async login() {
-            if (!this.loginForm.username || !this.loginForm.password) {
+            if (!this.loginForm.email || !this.loginForm.password) {
                 this.error = 'Username and password are required!';
                 return;
             }
 
             try {
-                var url = `${process.env.VUE_APP_BASE_API_URL}/Authentications/Login`;
+                var url = `${process.env.VUE_APP_BASE_API_URL}/auth/login`;
                 const response = await axios.post(url, {
-                    username: this.loginForm.username,
-                    password: this.loginForm.password
+                    email: this.loginForm.email,
+                    password: this.loginForm.password,
+                    name: this.loginForm.name
                 });
-
-                if (response.status === 200) {
+                console.log(response);
+                
+                if (response.status === 201 ) {
                     const data = response.data;
-                    const roles = data.roles;
-
+                    const roles = data.role;
                     console.log(roles);
-
-
                     if (roles.includes('ADMIN')) {
-                        // localStorage.setItem('token', data.token);
                         localStorage.setItem('adminToken', data.token);
                         console.log('Đăng nhập thành công:', data);
                         this.$router.push('/admin').then(() => {
