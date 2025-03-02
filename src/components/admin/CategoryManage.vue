@@ -35,7 +35,7 @@
                         <tbody>
                             <tr v-for="c in categoryData" :key="c.id" style="text-align: center;">
                                 <td>{{ c.id }}</td>
-                                <td>{{ c.categoryName }}</td>
+                                <td>{{ c.name }}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                         <button type="button" class="btn-update" @click="openUpdateModal(c)">Update</button>
@@ -116,7 +116,7 @@ export default {
     },
     methods: {
         loadCategoryData() {
-            var url = process.env.VUE_APP_BASE_API_URL + `/Categories/GetAll`;
+            var url = process.env.VUE_APP_BASE_API_URL + `/categories`;
             axios.get(url).then((response) => {
                 this.totalItems = response.data.length;
                 this.totalPages = Math.ceil(this.totalItems / this.pageSize);

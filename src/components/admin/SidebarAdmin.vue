@@ -28,7 +28,7 @@
             <li>
                 <a href="#">
                     <i class='bx icon fa fa-dashboard'></i>
-                    <router-link class="text" to="/admin/customermanage">Customer Manage</router-link>
+                    <router-link class="text" to="/admin/customermanage">Users Manage</router-link>
                 </a>
             </li>
             <li>
