@@ -1,0 +1,119 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f4f6;
+    margin: 0;
+    padding: 0;
+  }
+  .header, .nav {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  .header img {
+    height: 40px;
+  }
+  .header input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  .header button {
+    background-color: #e2e8f0;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .header img.flag {
+    height: 20px;
+  }
+  .nav {
+    background-color: #1e3a8a;
+    color: white;
+    padding: 10px 20px;
+  }
+  .nav a {
+    color: white;
+    margin-right: 20px;
+    text-decoration: none;
+  }
+  .nav select {
+    background-color: #6d28d9;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+  }
+  .main {
+    padding: 20px;
+  }
+  .main img {
+    width: 100%;
+    border-radius: 8px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .grid img {
+    width: 100%;
+    border-radius: 8px;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2d3748;
+}
+.header a {
+    color: #4299e1;
+    text-decoration: none;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+@media (min-width: 640px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (min-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.card p {
+    padding: 16px;
+    color: #2d3748;
+    font-weight: 600;
+}

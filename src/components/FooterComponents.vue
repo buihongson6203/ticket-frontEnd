@@ -1,131 +1,59 @@
 <template>
     <!-- ============================================================= FOOTER ============================================================= -->
     <footer id="footer" class="footer color-bg">
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <div class="module-heading">
-                            <h4 class="module-title">Contact Us</h4>
-                        </div>
-                        <!-- /.module-heading -->
-
-                        <div class="module-body">
-                            <ul class="toggle-footer" style="">
-                                <li class="media">
-                                    <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i
-                                                class="fa fa-map-marker fa-stack-1x fa-inverse"></i> </span> </div>
-                                    <div class="media-body">
-                                        <p>ThemesGround, 789 Main rd, Anytown, CA 12345 USA</p>
-                                    </div>
-                                </li>
-                                <li class="media">
-                                    <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i
-                                                class="fa fa-mobile fa-stack-1x fa-inverse"></i> </span> </div>
-                                    <div class="media-body">
-                                        <p>+(888) 123-4567<br>
-                                            +(888) 456-7890</p>
-                                    </div>
-                                </li>
-                                <li class="media">
-                                    <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i
-                                                class="fa fa-envelope fa-stack-1x fa-inverse"></i> </span> </div>
-                                    <div class="media-body"> <span><a href="#">flipmart@themesground.com</a></span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- /.module-body -->
-                    </div>
-                    <!-- /.col -->
-
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <div class="module-heading">
-                            <h4 class="module-title">Customer Service</h4>
-                        </div>
-                        <!-- /.module-heading -->
-
-                        <div class="module-body">
-                            <ul class='list-unstyled'>
-                                <li class="first"><a href="#" title="Contact us">My Account</a></li>
-                                <li><a href="#" title="About us">Order History</a></li>
-                                <li><a href="#" title="faq">FAQ</a></li>
-                                <li><a href="#" title="Popular Searches">Specials</a></li>
-                                <li class="last"><a href="#" title="Where is my order?">Help Center</a></li>
-                            </ul>
-                        </div>
-                        <!-- /.module-body -->
-                    </div>
-                    <!-- /.col -->
-
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <div class="module-heading">
-                            <h4 class="module-title">Corporation</h4>
-                        </div>
-                        <!-- /.module-heading -->
-
-                        <div class="module-body">
-                            <ul class='list-unstyled'>
-                                <li class="first"><a title="Your Account" href="#">About us</a></li>
-                                <li><a title="Information" href="#">Customer Service</a></li>
-                                <li><a title="Addresses" href="#">Company</a></li>
-                                <li><a title="Addresses" href="#">Investor Relations</a></li>
-                                <li class="last"><a title="Orders History" href="#">Advanced Search</a></li>
-                            </ul>
-                        </div>
-                        <!-- /.module-body -->
-                    </div>
-                    <!-- /.col -->
-
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <div class="module-heading">
-                            <h4 class="module-title">Why Choose Us</h4>
-                        </div>
-                        <!-- /.module-heading -->
-
-                        <div class="module-body">
-                            <ul class='list-unstyled'>
-                                <li class="first"><a href="#" title="About us">Shopping Guide</a></li>
-                                <li><a href="#" title="Blog">Blog</a></li>
-                                <li><a href="#" title="Company">Company</a></li>
-                                <li><a href="#" title="Investor Relations">Investor Relations</a></li>
-                                <li class=" last"><a href="contact-us.html" title="Suppliers">Contact Us</a></li>
-                            </ul>
-                        </div>
-                        <!-- /.module-body -->
-                    </div>
+        <div class="container">
+            <div class="grid">
+                <div>
+                    <h3>Liên Hệ Hợp Tác</h3>
+                    <p>Điện thoại: 0243.788.00.99 (8:30 - 17:00)</p>
+                    <p>Hotline: 08.999.80.818</p>
+                    <p>Email: ticketgo.vn@gmail.com</p>
+                    <p>Địa chỉ: Số 1, Phạm Văn Bạch, phường Yên Hòa, quận Cầu Giấy, Hà Nội.</p>
+                    <p class="mt-4">Ứng dụng TicketGo</p>
+                    <img src="https://storage.googleapis.com/a1aa/image/REPYbKmR_3qkBaHcU5C5lZ95f5wBkzQQkCRA-gRqf7o.jpg" alt="App Store Download Button" width="150" height="50">
                 </div>
-            </div>
-        </div>
-        <div class="copyright-bar">
-            <div class="container">
-                <div class="col-xs-12 col-sm-6 no-padding social">
-                    <ul class="link">
-                        <li class="fb pull-left"><a target="_blank" rel="nofollow" href="#" title="Facebook"></a></li>
-                        <li class="tw pull-left"><a target="_blank" rel="nofollow" href="#" title="Twitter"></a></li>
-                        <li class="googleplus pull-left"><a target="_blank" rel="nofollow" href="#"
-                                title="GooglePlus"></a></li>
-                        <li class="rss pull-left"><a target="_blank" rel="nofollow" href="#" title="RSS"></a></li>
-                        <li class="pintrest pull-left"><a target="_blank" rel="nofollow" href="#" title="PInterest"></a>
-                        </li>
-                        <li class="linkedin pull-left"><a target="_blank" rel="nofollow" href="#" title="Linkedin"></a>
-                        </li>
-                        <li class="youtube pull-left"><a target="_blank" rel="nofollow" href="#" title="Youtube"></a>
-                        </li>
+                <div>
+                    <h3>Thông tin</h3>
+                    <ul>
+                        <li><a href="#">Về chúng tôi</a></li>
+                        <li><a href="#">Khuyến mãi</a></li>
+                        <li><a href="#">Phương thức thanh toán</a></li>
+                        <li><a href="#">Chính sách bảo mật và các điều khoản</a></li>
+                        <li><a href="#">Hướng dẫn đặt vé</a></li>
+                        <li><a href="#">Các câu hỏi thường gặp</a></li>
+                        <li><a href="#">Chính sách điều khoản sử dụng cho khách hàng</a></li>
                     </ul>
                 </div>
-                <div class="col-xs-12 col-sm-6 no-padding">
-                    <div class="clearfix payment-methods">
-                        <ul>
-                            <!-- <li><img src="assets\images\payments\1.png" alt=""></li>
-                            <li><img src="assets\images\payments\2.png" alt=""></li>
-                            <li><img src="assets\images\payments\3.png" alt=""></li>
-                            <li><img src="assets\images\payments\4.png" alt=""></li>
-                            <li><img src="assets\images\payments\5.png" alt=""></li> -->
-                        </ul>
-                    </div>
-                    <!-- /.payment-methods -->
+                <div>
+                    <h3>Khách hàng</h3>
+                    <ul>
+                        <li><a href="#">Đăng nhập dành cho đối tác</a></li>
+                        <li><a href="#">Tài khoản</a></li>
+                        <li><a href="#">Gửi sự kiện</a></li>
+                        <li><a href="#">Danh sách sự kiện</a></li>
+                        <li><a href="#">Sự kiện đã diễn ra</a></li>
+                        <li><a href="#">Chương trình Go Xu</a></li>
+                    </ul>
                 </div>
+                <div>
+                    <h3>Đăng ký nhận email</h3>
+                    <div class="email-input">
+                        <input type="email" placeholder="Email của bạn">
+                        <button><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                    <div class="social-icons">
+                        <a href="#" class="text-blue-600"><i class="fab fa-facebook-square"></i></a>
+                        <a href="#" class="text-red-600"><i class="fab fa-pinterest-square"></i></a>
+                        <a href="#" class="text-blue-400"><i class="fab fa-twitter-square"></i></a>
+                        <a href="#" class="text-brown-600"><i class="fab fa-instagram-square"></i></a>
+                        <a href="#" class="text-blue-700"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-red-600"><i class="fab fa-youtube-square"></i></a>
+                    </div>
+                    <p>Giấy phép Kinh doanh số 0107641285 do Sở Kế Hoạch & Đầu Tư Thành Phố Hà Nội cấp ngày 21/11/2016</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Bạn đang truy cập TicketGo Phiên bản Số 21T82024 với địa chỉ 1.55.68.28</p>
             </div>
         </div>
     </footer>
@@ -150,6 +78,6 @@ export default {
     }
 }
 </script>
-<style>
-
+<style scoped>
+    @import '@/assets/footer.css';
 </style>
