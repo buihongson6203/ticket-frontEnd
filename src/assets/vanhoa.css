@@ -1,0 +1,129 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.main-event {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+.main-event img {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 8px;
+}
+.main-event-details {
+    flex: 1;
+    padding-left: 20px;
+}
+.main-event-details h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.main-event-details .info {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+.main-event-details .info i {
+    margin-right: 5px;
+}
+.main-event-details .price {
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.main-event-details p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+.events-list {
+    margin-bottom: 20px;
+}
+.events-list h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.events-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.event-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: calc(33.333% - 20px);
+    margin-bottom: 20px;
+}
+.event-card img {
+    width: 100%;
+    height: auto;
+}
+.event-card .content {
+    padding: 15px;
+}
+.event-card .content .date {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+.event-card .content .date .month {
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+.event-card .content .date .day {
+    font-size: 18px;
+    font-weight: bold;
+}
+.event-card .content .date .price {
+    margin-left: auto;
+    color: red;
+    font-weight: bold;
+}
+.event-card .content h4 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.event-card .content .info {
+    font-size: 14px;
+    color: #666;
+}
+.event-card .content .info i {
+    margin-right: 5px;
+}
+@media (max-width: 768px) {
+    .main-event {
+        flex-direction: column;
+    }
+    .main-event-details {
+        padding-left: 0;
+        margin-top: 20px;
+    }
+    .event-card {
+        width: calc(50% - 20px);
+    }
+}
+@media (max-width: 480px) {
+    .event-card {
+        width: 100%;
+    }
+}

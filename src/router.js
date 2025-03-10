@@ -18,6 +18,7 @@ import CustomerManageView from './views/admin/CustomerManageView.vue';
 import OrderManageView from './views/admin/OrderManageView.vue';
 import OrderDetailsManageView from './components/admin/OrderDetailsManage.vue';
 import CreateCategoryView from './views/admin/CreateCategoryView.vue';
+import Vanhoanghethuat from './components/vanhoanghethuat.vue';
 
 
 
@@ -110,6 +111,11 @@ const routes = [
         path: '/forgotpassword',
         name: 'ForgotPasswordView',
         component: ForgotPasswordView
+    },
+    {
+        path: '/vanhoa',
+        name: 'vanhoanghethuat',
+        component: Vanhoanghethuat
     }
 ]
 
