@@ -72,8 +72,10 @@ body {
     width: 100%;
     height: auto;
 }
-.event-card .content {
+.event-card .vanhoa-content {
     padding: 15px;
+    height: 200px;
+    border: 2px solid black;
 }
 .event-card .content .date {
     display: flex;
@@ -82,32 +84,33 @@ body {
     color: #666;
     margin-bottom: 10px;
 }
-.event-card .content .date .month {
+.event-card .vanhoa-content .date .month {
     background-color: #f0f0f0;
     color: #333;
     padding: 5px 10px;
     border-radius: 4px;
     margin-right: 10px;
 }
-.event-card .content .date .day {
+.event-card .vanhoa-content .date .day {
     font-size: 18px;
     font-weight: bold;
 }
-.event-card .content .date .price {
+.event-card .vanhoa-content .date .price {
     margin-left: auto;
     color: red;
     font-weight: bold;
+    font-size: 20px;
 }
-.event-card .content h4 {
+.event-card .vanhoa-content h4 {
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 10px;
 }
-.event-card .content .info {
+.event-card .vanhoa-content .info {
     font-size: 14px;
     color: #666;
 }
-.event-card .content .info i {
+.event-card .vanhoa-content .info i {
     margin-right: 5px;
 }
 @media (max-width: 768px) {
