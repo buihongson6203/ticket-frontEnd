@@ -2,6 +2,7 @@
     <!-- ============================================================= FOOTER ============================================================= -->
     <footer id="footer" class="footer color-bg">
         <div class="container">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
             <div class="grid">
                 <div>
                     <h3>Liên Hệ Hợp Tác</h3>
@@ -10,7 +11,6 @@
                     <p>Email: ticketgo.vn@gmail.com</p>
                     <p>Địa chỉ: Số 1, Phạm Văn Bạch, phường Yên Hòa, quận Cầu Giấy, Hà Nội.</p>
                     <p class="mt-4">Ứng dụng TicketGo</p>
-                    <img src="https://storage.googleapis.com/a1aa/image/REPYbKmR_3qkBaHcU5C5lZ95f5wBkzQQkCRA-gRqf7o.jpg" alt="App Store Download Button" width="150" height="50">
                 </div>
                 <div>
                     <h3>Thông tin</h3>
@@ -35,12 +35,7 @@
                         <li><a href="#">Chương trình Go Xu</a></li>
                     </ul>
                 </div>
-                <div>
-                    <h3>Đăng ký nhận email</h3>
-                    <div class="email-input">
-                        <input type="email" placeholder="Email của bạn">
-                        <button><i class="fas fa-paper-plane"></i></button>
-                    </div>
+                <div>   
                     <div class="social-icons">
                         <a href="#" class="text-blue-600"><i class="fab fa-facebook-square"></i></a>
                         <a href="#" class="text-red-600"><i class="fab fa-pinterest-square"></i></a>
@@ -52,9 +47,7 @@
                     <p>Giấy phép Kinh doanh số 0107641285 do Sở Kế Hoạch & Đầu Tư Thành Phố Hà Nội cấp ngày 21/11/2016</p>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>Bạn đang truy cập TicketGo Phiên bản Số 21T82024 với địa chỉ 1.55.68.28</p>
-            </div>
+
         </div>
     </footer>
 </template>

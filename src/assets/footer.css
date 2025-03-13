@@ -19,10 +19,13 @@ body {
     }
 }
 h3 {
+    font-size: 20px; /* Tăng kích thước tiêu đề */
     font-weight: bold;
     margin-bottom: 16px;
 }
+
 p, ul, li {
+    font-size: 14px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -70,7 +73,16 @@ a:hover {
     width: 100px;
     height: auto;
 }
+.footer {
+    background-color: #222; /* Màu xám đậm hoặc có thể đổi thành #000 nếu muốn đen hoàn toàn */
+    color: white;
+    padding: 40px 20px;
+}
+
 .footer-bottom {
+    background-color: #111; /* Chuyển màu nền footer-bottom thành đen hoặc xám */
+    color: white;
     text-align: center;
+    padding: 10px;
     margin-top: 32px;
 }
