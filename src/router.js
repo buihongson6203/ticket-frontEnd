@@ -1,11 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import HomePageView from './views/HomePageView.vue';
-import CategoryDetailsPageView from './views/CategoryDetailsPageView.vue';
-import ProductDetailsPageView from './views/ProductDetailsPageView.vue';
-import CartView from './views/CartView.vue';
-
-
 import LoginPageView from './views/LoginPageView.vue';
 import RegisterPageView from './views/RegisterPageView.vue';
 import ForgotPasswordView from './views/ForgotPasswordView.vue';
@@ -19,6 +14,8 @@ import OrderManageView from './views/admin/OrderManageView.vue';
 import OrderDetailsManageView from './components/admin/OrderDetailsManage.vue';
 import CreateCategoryView from './views/admin/CreateCategoryView.vue';
 import Vanhoanghethuat from './components/vanhoanghethuat.vue';
+import DetailEvent from './views/DetailEvent.vue';
+
 
 
 
@@ -29,19 +26,9 @@ const routes = [
         component: HomePageView,
     },
     {
-        path: '/category/:categoryId',
-        name: 'CategoryDetailsPageView',
-        component: CategoryDetailsPageView,
-    },
-    {
-        path: '/productdetails/:id',
-        name: 'ProductDetailsPageView',
-        component: ProductDetailsPageView,
-    },
-    {
-        path: '/cart',
-        name: 'CartView',
-        component: CartView,
+        path: '/event/:id',
+        name: 'DetailEvent',
+        component: DetailEvent ,
     },
     {
         path: '/admin',

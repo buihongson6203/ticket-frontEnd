@@ -1,20 +1,31 @@
 <template>
   <HeaderComponents />
-  <div class="container">
+  <div class="container-home">
     <main>
+      <!-- Banner Slider -->
       <section class="banner">
-        <img src="https://storage.googleapis.com/a1aa/image/OOcopDQjrvUZ6Ndj5w063h4CoyjpggMAdAG0srV0lHA.jpg" alt="GO - VCHESS 2025">
+        <swiper :modules="[Navigation, Pagination, Autoplay]" :slides-per-view="1" :loop="true"
+          :autoplay="{ delay: 3000, disableOnInteraction: false }" :pagination="{ clickable: true }" class="my-swiper">
+          <swiper-slide v-for="(image, index) in banners" :key="index">
+            <img :src="image" alt="Banner Image" class="banner-image">
+          </swiper-slide>
+        </swiper>
       </section>
       <section class="events">
+        <div class="title-header">
+          <p>Danh sách sự kiện</p>
+        </div>
         <div class="event-grid">
-          <div v-for="event in events" :key="event.id" class="event-item">
-            <img :src="`${baseApiUrl}${event.image}`" alt="Image">
-            <div class="p-4 border-b">
+          <div v-for="event in events" :key="event.id" class="event-item" @click="goToEventDetail(event.id)"
+            style="cursor: pointer;">
+            <img :src="`${baseApiUrl}${event.image}`" alt="Event Image">
+            <div class="p-4 border-b waper-event">
               <div class="content-home">
-                <h3 class="text-xl font-semibold title-event">{{ event.title }}</h3>
+                <p class="text-xl font-semibold title-event">{{ event.title }}</p>
               </div>
               <div class="event-date">
-                <p>{{ new Date(event.startTime).toLocaleString() }} - {{ new Date(event.endTime).toLocaleString() }}</p>
+                <p>{{ new Date(event.startTime).toLocaleDateString() }} - {{ new
+                  Date(event.endTime).toLocaleDateString() }}</p>
               </div>
             </div>
           </div>
@@ -27,21 +38,34 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { useRouter } from "vue-router"; // ✅ Import useRouter
+
 import HeaderComponents from './HeaderComponents.vue';
 import FooterComponents from './FooterComponents.vue';
 
 const events = ref([]);
+const banners = ref([]);
 const baseApiUrl = process.env.VUE_APP_BASE_API_URL || 'http://localhost:3000';
+const router = useRouter();
 
-// Khai báo biến cho tham số API
 const sortType = "DESC";
-const size = 20;
+const size = 12;
+
+const goToEventDetail = (eventId) => {
+  router.push(`/event/${eventId}`);
+};
 
 const fetchEvents = async () => {
   try {
     const response = await fetch(`${baseApiUrl}/events?sortType=${sortType}&size=${size}`);
     const data = await response.json();
     events.value = data.data;
+    banners.value = events.value.slice(0, 3).map(event => `${baseApiUrl}${event.image}`);
   } catch (error) {
     console.error("Lỗi khi lấy dữ liệu:", error);
   }
@@ -49,7 +73,6 @@ const fetchEvents = async () => {
 
 onMounted(fetchEvents);
 </script>
-
 <style scoped>
 @import '../assets/home.css';
 </style>
