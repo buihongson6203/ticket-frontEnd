@@ -25,13 +25,13 @@
                 <!-- Event Card -->
                 <div class="event-card">
                     <img src="https://storage.googleapis.com/a1aa/image/nF7d6taKgb33Zf618e1-ujL7Rlvl88Jhdf7yDA8oD74.jpg" alt="Event image showing a digital art museum">
-                    <div class="content">
+                    <div class="vanhoa-content">
                         <div class="date">
                             <div class="month">Tháng 12</div>
                             <div class="day">20</div>
                             <div class="price">VND 10.000 +</div>
                         </div>
-                        <h4>I-Museum - Bảo tàng nghệ thuật đa giác quan đầu tiên tại</h4>
+                        <h4>I-Museum - Bảo tàng nghệ thuật đa <br/> giác quan đầu tiên tại</h4>
                         <div class="info">
                             <i class="fas fa-eye"></i> 143.823
                             <span>|</span>
@@ -42,7 +42,7 @@
                 <!-- Repeat Event Cards for each event -->
                 <div class="event-card">
                     <img src="https://storage.googleapis.com/a1aa/image/5S9tcQa8VzgKevNFOb6L02IDYbwbFJFCQc6aegjOwpU.jpg" alt="Event image showing a fashion exhibition">
-                    <div class="content">
+                    <div class="vanhoa-content">
                         <div class="date">
                             <div class="month">Tháng 1</div>
                             <div class="day">01</div>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="event-card">
                     <img src="https://storage.googleapis.com/a1aa/image/J4Mq-z5JaJzuMd5RdXqPtyXHpaMdVne2jbmJEz_rkyc.jpg" alt="Event image showing an art museum">
-                    <div class="content">
+                    <div class="vanhoa-content">
                         <div class="date">
                             <div class="month">Tháng 1</div>
                             <div class="day">01</div>
@@ -74,7 +74,7 @@
                 </div>
                 <div class="event-card">
                     <img src="https://storage.googleapis.com/a1aa/image/E2B6Wm-A1-51eyDChkU3CDe4mtHIZwM_tqI4LuJvUvc.jpg" alt="Event image showing a light garden">
-                    <div class="content">
+                    <div class="vanhoa-content">
                         <div class="date">
                             <div class="month">Tháng 1</div>
                             <div class="day">04</div>
@@ -90,7 +90,7 @@
                 </div>
                 <div class="event-card">
                     <img src="https://storage.googleapis.com/a1aa/image/BO4PcXaJPNlANRYn7nUwP2qTLOHBEEgT2MyA_ZYRvR4.jpg" alt="Event image showing a cultural performance">
-                    <div class="content">
+                    <div class="vanhoa-content">
                         <div class="date">
                             <div class="month">Tháng 1</div>
                             <div class="day">04</div>
@@ -106,7 +106,7 @@
                 </div>
                 <div class="event-card">
                     <img src="https://storage.googleapis.com/a1aa/image/BO4PcXaJPNlANRYn7nUwP2qTLOHBEEgT2MyA_ZYRvR4.jpg" alt="Event image showing a cultural performance">
-                    <div class="content">
+                    <div class="vanhoa-content">
                         <div class="date">
                             <div class="month">Tháng 1</div>
                             <div class="day">04</div>
@@ -143,5 +143,5 @@ export default {
 </script>
 
 <style scoped>
-@import '@/assets/vanhoa.css';
+@import '/src/assets/vanhoa.css';
 </style>
