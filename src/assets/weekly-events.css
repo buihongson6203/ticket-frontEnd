@@ -1,0 +1,74 @@
+.weekly-events {
+    text-align: center;
+    max-width: 1400px !important;
+    margin: 0 auto;
+    padding: 20px;
+}
+.breadcumd{
+    display: flex;
+    justify-content: start;
+}
+.weekly-events-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #ff5733;
+    text-transform: uppercase;
+}
+
+.weekly-events-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    justify-content: center;
+    padding: 10px;
+}
+
+.weekly-events-item {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.weekly-events-item:hover {
+    transform: scale(1.05);
+}
+
+.weekly-events-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+.weekly-events-content {
+    padding: 15px;
+    text-align: left;
+}
+
+.weekly-events-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.weekly-events-date {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.weekly-events-description {
+    font-size: 14px;
+    color: #444;
+}
+
+.weekly-events-empty {
+    font-size: 18px;
+    color: #999;
+    font-style: italic;
+    margin-top: 20px;
+}

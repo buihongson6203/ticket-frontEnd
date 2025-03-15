@@ -15,6 +15,7 @@ import OrderDetailsManageView from './components/admin/OrderDetailsManage.vue';
 import CreateCategoryView from './views/admin/CreateCategoryView.vue';
 import Vanhoanghethuat from './components/vanhoanghethuat.vue';
 import DetailEvent from './views/DetailEvent.vue';
+import WeeklyEvents from './views/WeeklyEvents.vue';
 
 
 
@@ -103,7 +104,14 @@ const routes = [
         path: '/vanhoa',
         name: 'vanhoanghethuat',
         component: Vanhoanghethuat
+    },
+
+    {
+        path: '/weekly-events',
+        name: 'WeeklyEvents',
+        component: WeeklyEvents
     }
+
 ]
 
 const router = createRouter({

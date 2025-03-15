@@ -6,7 +6,7 @@ body {
 }
 
 .container-home {
-  max-width: 1470px !important;
+  max-width: 1400px !important;
   margin: 0 auto;
   padding: 20px;
 }
@@ -56,7 +56,8 @@ header h1:hover {
   object-fit: cover;
   border-radius: 10px;
 }
-.title-header  {
+
+/* .title-header  {
   font-size: 150px;
   font-weight: bold;
   color: #ff6600; 
@@ -65,15 +66,18 @@ header h1:hover {
   text-transform: uppercase;
   border-bottom: 3px solid #ff6600;
   margin-bottom: 20px;
-}
+  display: flex;
+  justify-content: space-between;
+} */
 
 .events {
-  padding: 40px;
+  padding-top: 15px;
   text-align: center;
 }
+
 .event-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Chia thành 4 cột */
+  grid-template-columns: repeat(4, 1fr);
   gap: 15px;
 }
 
@@ -96,7 +100,8 @@ header h1:hover {
 .event-item img:hover {
   transform: scale(1.05);
 }
-.content-home{
+
+.content-home {
   padding-top: 10px;
 }
 
@@ -105,8 +110,9 @@ header h1:hover {
   display: flex;
   font-size: 15px;
   font-weight: bold;
-  font-family:"Roboto";
+  font-family: "Roboto";
 }
+
 .event-date {
   padding-left: 5px;
   font-size: 16px;
@@ -119,4 +125,122 @@ header h1:hover {
   margin: 20px 0;
   text-align: left;
   color: #ff5733;
+}
+
+.title-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-top: 25px;
+}
+
+.title-header p {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+.title-header p::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 20px;
+  background: #ff6600;
+  margin-right: 10px;
+}
+
+.event-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.event-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  background: #ff6600;
+  color: white;
+}
+
+.event-button:hover {
+  background: #e65c00;
+}
+
+.icon {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.waper-event {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+  position: relative;
+  padding-top: 10px;
+}
+
+.event-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 7px;
+}
+
+.event-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.event-date, .event-location {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #444;
+  font-weight: 500;
+}
+
+.event-date i,
+.event-location i {
+  font-size: 18px; /* Đồng bộ kích thước icon */
+  margin-right: 6px; /* Cách chữ một khoảng đều */
+}
+
+.event-date i {
+  color: #e74c3c;
+}
+
+.event-location i {
+  color: #3498db;
+}
+
+.event-price {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.event-price i {
+  font-size: 18px; /* Icon tiền đồng bộ kích thước */
+  color: #27ae60;
 }
