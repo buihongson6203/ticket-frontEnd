@@ -16,6 +16,7 @@ import CreateCategoryView from './views/admin/CreateCategoryView.vue';
 import Vanhoanghethuat from './components/vanhoanghethuat.vue';
 import DetailEvent from './views/DetailEvent.vue';
 import WeeklyEvents from './views/WeeklyEvents.vue';
+import TintucView from './views/TintucView.vue';
 
 
 
@@ -110,6 +111,11 @@ const routes = [
         path: '/weekly-events',
         name: 'WeeklyEvents',
         component: WeeklyEvents
+    },
+    {
+        path: '/tintuc',
+        name: 'TintucView',
+        component: TintucView,
     }
 
 ]
