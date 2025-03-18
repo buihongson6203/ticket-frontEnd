@@ -130,4 +130,67 @@
 
 </script>
 
-<style scoped></style>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.grid>div {
+    flex: 1;
+    min-width: 300px;
+}
+
+h2 {
+    font-size: 1.5em;
+    color: #ff6600;
+    margin-bottom: 20px;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+.flex {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.flex img {
+    width: 100px;
+    height: 60px;
+    margin-right: 10px;
+}
+
+a {
+    color: #1e90ff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+</style>
