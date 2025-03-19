@@ -1,17 +1,5 @@
 <template>
-    <html lang="en">
-
-    <head>
-        <meta charset="utf-8" />
-        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-        <title>
-            Events Page
-        </title>
-        <script src="https://cdn.tailwindcss.com">
-    </script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    </head>
-
+        <HeaderComponents />
     <body class="bg-white text-gray-800">
         <div class="container mx-auto px-4 py-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -122,15 +110,14 @@
             </div>
         </div>
     </body>
-
-    </html>
+    <FooterComponents />
 </template>
 
 <script>
 
 </script>
 
-<style>
+<style scope>
 body {
     font-family: Arial, sans-serif;
     background-color: white;

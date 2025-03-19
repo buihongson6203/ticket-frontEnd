@@ -5,7 +5,7 @@
   </template>
   
   <script>
-  import Tintuc from '@/componentsTintucView.vue';
+  import Tintuc from '@/components/TintucComponents.vue';
   
   export default {
     name: 'TintucView',

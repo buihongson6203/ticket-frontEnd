@@ -75,7 +75,6 @@ body {
 .event-card .vanhoa-content {
     padding: 15px;
     height: 200px;
-    border: 2px solid black;
 }
 .event-card .content .date {
     display: flex;

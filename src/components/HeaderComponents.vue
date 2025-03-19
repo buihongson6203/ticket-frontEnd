@@ -37,7 +37,7 @@
                 <a href="http://localhost:8080/vanhoa">Văn hóa nghệ thuật</a>
                 <a href="#">Du lịch</a>
                 <a href="#">Vé tham quan</a>
-                <a href="#">Tin tức</a>
+                <a href="http://localhost:8080/tintuc">Tin tức</a>
             </div>
             <div>
                 <select>
