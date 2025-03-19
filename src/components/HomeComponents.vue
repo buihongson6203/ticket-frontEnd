@@ -11,6 +11,7 @@
           </swiper-slide>
         </swiper>
       </section>
+      <ReviewModal :isOpen="isReviewModalOpen" @close="closeReviewModal" />
 
       <!-- Danh sách sự kiện -->
       <section class="events">
@@ -21,7 +22,7 @@
               <span class="icon">📅</span> LỊCH SỰ KIỆN
             </button>
 
-            <button class="event-button event-submit-btn">
+            <button class="event-button event-submit-btn" @click="openReviewModal">
               <span class="icon">➕</span> GỬI SỰ KIỆN
             </button>
           </section>
@@ -57,8 +58,10 @@
           </div>
         </div>
       </section>
+
     </main>
   </div>
+  <!-- Modal -->
   <FooterComponents />
 </template>
 
@@ -73,6 +76,7 @@ import { useRouter } from "vue-router";
 
 import HeaderComponents from "./HeaderComponents.vue";
 import FooterComponents from "./FooterComponents.vue";
+import ReviewModal from "./modal/review-modal.vue";
 
 const events = ref([]);
 const banners = ref([]);
@@ -128,6 +132,16 @@ const openWeeklyEvents = () => {
   const { from, to } = getWeekRange();
   router.push({ path: "/weekly-events", query: { from, to } });
 };
+const isReviewModalOpen = ref(false);
+const openReviewModal = () => {
+  console.log('vao day');
+
+  isReviewModalOpen.value = true;
+};
+const closeReviewModal = () => {
+  isReviewModalOpen.value = false;
+};
+
 onMounted(fetchEvents);
 </script>
 
