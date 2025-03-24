@@ -18,117 +18,82 @@
       </div>
     </div>
 
-    <!-- Phần Nội Dung Chính (Ví dụ) -->
+    <!-- Phần Nội Dung Chính -->
     <div class="bg-white text-gray-800">
       <div class="tin-tuc-container mx-auto px-4 py-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <!-- Phần Hội Chợ & Triển Lãm -->
           <div class="card">
-            <h2 class="text-xl font-bold text-orange-600 mb-4">
-              HỘI CHỢ &amp; TRIỂN LÃM
-            </h2>
+            <h2 class="text-xl font-bold text-orange-600 mb-4">HỘI CHỢ &amp; TRIỂN LÃM</h2>
             <img
               alt="Colorful illustration of people dancing and celebrating with text 'Liên kết đào tạo Việt Nam - Hoa Kỳ'"
               class="w-full mb-4 rounded-lg shadow-lg" height="300"
               src="https://storage.googleapis.com/a1aa/image/XnB6xyHCXu26Hy5sQKZeCPx24NIc5wXlOn0rEgTTUrs.jpg"
               width="600" />
-            <a href="#" class="feature-text clickable-text">
-              Triển lãm các Chương trình Liên kết Đào tạo Việt Nam - Hoa Kỳ 2025.
-            </a>
+            <a href="#" class="feature-text clickable-text">Triển lãm các Chương trình Liên kết Đào tạo Việt Nam - Hoa Kỳ 2025.</a>
             <div class="mb-4">
               <div class="flex items-start mb-2">
                 <img alt="Exhibition poster with text 'Triển lãm Mê man'" class="w-24 h-16 mr-4 rounded-lg object-cover"
-                  height="60"
-                  src="https://storage.googleapis.com/a1aa/image/P8BzlfhIwTb4J0t_BfuU9wBFEHB8Xg9mVYgTPzuv09Q.jpg"
+                  height="60" src="https://storage.googleapis.com/a1aa/image/P8BzlfhIwTb4J0t_BfuU9wBFEHB8Xg9mVYgTPzuv09Q.jpg"
                   width="100" />
-                <a href="#" class="clickable-text">
-                  Triển lãm Mê man
-                </a>
+                <a href="#" class="clickable-text">Triển lãm Mê man</a>
               </div>
               <div class="flex items-start mb-2">
-                <img alt="Exhibition poster with text 'The world as a draft'"
-                  class="w-24 h-16 mr-4 rounded-lg object-cover" height="60"
-                  src="https://storage.googleapis.com/a1aa/image/d6dfhZLl5f17BYCOwWUKnKmRs5IcaAP3hlcvhyf3P08.jpg"
+                <img alt="Exhibition poster with text 'The world as a draft'" class="w-24 h-16 mr-4 rounded-lg object-cover"
+                  height="60" src="https://storage.googleapis.com/a1aa/image/d6dfhZLl5f17BYCOwWUKnKmRs5IcaAP3hlcvhyf3P08.jpg"
                   width="100" />
-                <a href="#" class="clickable-text">
-                  Triển lãm THẾ GIỚI NHƯ LÀ BẢN NHÁP - Đỗ Thanh Lãng &amp; Nguyễn Đức Đạt
-                </a>
+                <a href="#" class="clickable-text">Triển lãm THẾ GIỚI NHƯ LÀ BẢN NHÁP - Đỗ Thanh Lãng &amp; Nguyễn Đức Đạt</a>
               </div>
               <div class="flex items-start mb-2">
                 <img alt="Exhibition poster with text 'Retro Rewind'" class="w-24 h-16 mr-4 rounded-lg object-cover"
-                  height="60"
-                  src="https://storage.googleapis.com/a1aa/image/UZ1IteGN_Vb0N2T8LEYVkro2cAWQEZLC8bNOcMSA8W8.jpg"
+                  height="60" src="https://storage.googleapis.com/a1aa/image/UZ1IteGN_Vb0N2T8LEYVkro2cAWQEZLC8bNOcMSA8W8.jpg"
                   width="100" />
-                <a href="#" class="clickable-text">
-                  Hội chợ rong chơi vol 13: Retro Rewind
-                </a>
+                <a href="#" class="clickable-text">Hội chợ rong chơi vol 13: Retro Rewind</a>
               </div>
               <div class="flex items-start mb-2">
-                <img alt="Exhibition poster with text 'Xuân an lành - Chơi vui khỏe'"
-                  class="w-24 h-16 mr-4 rounded-lg object-cover" height="60"
-                  src="https://i.ex-cdn.com/vntravellive.com/files/news/2019/05/02/the-gioi-den-long-ruc-ro-o-hoi-an-161742.jpg"
+                <img alt="Exhibition poster with text 'Xuân an lành - Chơi vui khỏe'" class="w-24 h-16 mr-4 rounded-lg object-cover"
+                  height="60" src="https://i.ex-cdn.com/vntravellive.com/files/news/2019/05/02/the-gioi-den-long-ruc-ro-o-hoi-an-161742.jpg"
                   width="100" />
-                <a href="#" class="clickable-text">
-                  Hội chợ 2025: Xuân an lành - Chơi vui khỏe
-                </a>
+                <a href="#" class="clickable-text">Hội chợ 2025: Xuân an lành - Chơi vui khỏe</a>
               </div>
             </div>
-            <a class="text-blue-600 hover:underline" href="#">
-              Xem thêm
-            </a>
+            <a class="text-blue-600 hover:underline" href="#">Xem thêm</a>
           </div>
+
           <!-- Phần Âm Nhạc - Music Shows -->
           <div class="card">
-            <h2 class="text-xl font-bold text-orange-600 mb-4">
-              ÂM NHẠC - MUSIC SHOWS
-            </h2>
+            <h2 class="text-xl font-bold text-orange-600 mb-4">ÂM NHẠC - MUSIC SHOWS</h2>
             <img alt="Poster of a music show with a woman in a red dress and text 'HLALAH Xóm Nhạc'"
               class="w-full mb-4 rounded-lg shadow-lg" height="300"
               src="https://storage.googleapis.com/a1aa/image/H5yubsxsakUQfs5o7OeyT92QkbhSOP90BFHw__NnjnA.jpg"
               width="600" />
-            <a href="#" class="feature-text clickable-text">
-              Đêm nhạc Halah - Xóm Nhạc - Ngày 20.03.2025
-            </a>
+            <a href="#" class="feature-text clickable-text">Đêm nhạc Halah - Xóm Nhạc - Ngày 20.03.2025</a>
             <div class="mb-4">
               <div class="flex items-start mb-2">
                 <img alt="Concert poster with text 'Rock Trống Taiko'" class="w-24 h-16 mr-4 rounded-lg object-cover"
-                  height="60"
-                  src="https://file3.qdnd.vn/data/images/0/2022/10/24/vuhuyen/nhac-vien.jpg?dpi=150&quality=100&w=870"
+                  height="60" src="https://file3.qdnd.vn/data/images/0/2022/10/24/vuhuyen/nhac-vien.jpg?dpi=150&quality=100&w=870"
                   width="100" />
-                <a href="#" class="clickable-text">
-                  Hòa nhạc Rock Trống Taiko đến từ Nhật Bản cùng BATI-HOLIC tại Hà Nội và Hồ Chí Minh 2025
-                </a>
+                <a href="#" class="clickable-text">Hòa nhạc Rock Trống Taiko đến từ Nhật Bản cùng BATI-HOLIC tại Hà Nội và Hồ Chí Minh 2025</a>
               </div>
               <div class="flex items-start mb-2">
                 <img alt="Concert poster with text 'MÙA XUÂN ĐẦU TIÊN'" class="w-24 h-16 mr-4 rounded-lg object-cover"
-                  height="60"
-                  src="https://storage.googleapis.com/a1aa/image/94Urb7UifENDYEK1zDDcfy7Ca7uMnjCcb4vuveA8x-0.jpg"
+                  height="60" src="https://storage.googleapis.com/a1aa/image/94Urb7UifENDYEK1zDDcfy7Ca7uMnjCcb4vuveA8x-0.jpg"
                   width="100" />
-                <a href="#" class="clickable-text">
-                  Salon Âm nhạc thính phòng tháng 3.2025 Chủ đề: MÙA XUÂN ĐẦU TIÊN
-                </a>
+                <a href="#" class="clickable-text">Salon Âm nhạc thính phòng tháng 3.2025 Chủ đề: MÙA XUÂN ĐẦU TIÊN</a>
               </div>
               <div class="flex items-start mb-2">
-                <img alt="Concert poster with text 'Linkin Park Cover Show'"
-                  class="w-24 h-16 mr-4 rounded-lg object-cover" height="60"
-                  src="https://storage.googleapis.com/a1aa/image/PdhAmQ3NFJAQ0sd7_ysX6-uNhNUl6UZdbVfxhCiqI2g.jpg"
+                <img alt="Concert poster with text 'Linkin Park Cover Show'" class="w-24 h-16 mr-4 rounded-lg object-cover"
+                  height="60" src="https://storage.googleapis.com/a1aa/image/PdhAmQ3NFJAQ0sd7_ysX6-uNhNUl6UZdbVfxhCiqI2g.jpg"
                   width="100" />
-                <a href="#" class="clickable-text">
-                  Đêm nhạc Linkin Park Cover Show - A place for our heads
-                </a>
+                <a href="#" class="clickable-text">Đêm nhạc Linkin Park Cover Show - A place for our heads</a>
               </div>
               <div class="flex items-start mb-2">
                 <img alt="Concert poster with text 'Women of Rock'" class="w-24 h-16 mr-4 rounded-lg object-cover"
                   height="60" src="https://wallpapercave.com/wp/wp9264044.jpg" width="100" />
-                <a href="#" class="clickable-text">
-                  Women of Rock - Đêm nhạc tôn vinh những nữ rocker huyền thoại | Avril Lavigne - Paramore - The Pretty
-                  Reckless
-                </a>
+                <a href="#" class="clickable-text">Women of Rock - Đêm nhạc tôn vinh những nữ rocker huyền thoại | Avril Lavigne - Paramore - The Pretty Reckless</a>
               </div>
             </div>
-            <a class="text-blue-600 hover:underline" href="#">
-              Xem thêm
-            </a>
+            <a class="text-blue-600 hover:underline" href="#">Xem thêm</a>
           </div>
         </div>
       </div>
@@ -139,65 +104,38 @@
   </div>
 </template>
 
-<script>
-// Import các component Header và Footer
-import HeaderComponents from './HeaderComponents';
-import FooterComponents from './FooterComponents';
+<script setup>
+import { ref, onMounted } from 'vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import 'swiper/swiper-bundle.css';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import HeaderComponents from './HeaderComponents.vue';
+import FooterComponents from './FooterComponents.vue';
+import axios from 'axios';
 
-export default {
-  name: "TintucComponents",
-  components: {
-    HeaderComponents,
-    FooterComponents,
-    Swiper,
-    SwiperSlide
+const items = ref([]);
+const baseApiUrl = process.env.VUE_APP_BASE_API_URL || 'http://localhost:3000';
+
+const swiperOptions = {
+  loop: true,
+  pagination: {
+    clickable: true,
   },
-  data() {
-    return {
-      items: [
-        {
-          src: 'https://placehold.co/400x300?text=Item+1',
-          alt: 'Poster cho Item 1',
-          caption: 'Item 1'
-        },
-        {
-          src: 'https://placehold.co/400x300?text=Item+2',
-          alt: 'Poster cho Item 2',
-          caption: 'Item 2'
-        },
-        {
-          src: 'https://placehold.co/400x300?text=Item+3',
-          alt: 'Poster cho Item 3',
-          caption: 'Item 3'
-        },
-        {
-          src: 'https://placehold.co/400x300?text=Item+4',
-          alt: 'Poster cho Item 4',
-          caption: 'Item 4'
-        },
-        {
-          src: 'https://placehold.co/400x300?text=Item+5',
-          alt: 'Poster cho Item 5',
-          caption: 'Item 5'
-        }
-      ],
-      swiperOptions: {
-        loop: true,
-        pagination: {
-          clickable: true,
-        },
-        navigation: true,
-      },
-    };
-  },
-  methods: {
-    jumpToSlide(index) {
-      this.$refs.swiper.swiper.slideTo(index);
-    },
-  },
+  navigation: true,
 };
+
+const fetchItems = async () => {
+  try {
+    const response = await axios.get(`${baseApiUrl}/items`); // Thay đổi đường dẫn API nếu cần
+    items.value = response.data; // Giả định rằng API trả về dữ liệu theo định dạng mà bạn cần
+  } catch (error) {
+    console.error('Lỗi khi gọi API:', error);
+  }
+};
+
+onMounted(fetchItems);
 </script>
 
 <style scoped>
