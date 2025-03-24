@@ -7,24 +7,24 @@
       <!-- Thông tin khách hàng -->
       <div class="customer-info">
         <h3>THÔNG TIN KHÁCH HÀNG / CUSTOMER INFORMATION</h3>
-        <input type="text" placeholder="Họ tên / Fullname" />
-        <input type="text" placeholder="Điện thoại / Phone" />
-        <input type="email" placeholder="Email" />
-        <input type="text" placeholder="Địa chỉ / Address" />
-        <input type="date" placeholder="Ngày xem show/sự kiện" />
+        <input type="text" v-model="customer.name" placeholder="Họ tên / Fullname" />
+        <input type="text" v-model="customer.phone" placeholder="Điện thoại / Phone" />
+        <input type="email" v-model="customer.email" placeholder="Email" />
+        <input type="text" v-model="customer.address" placeholder="Địa chỉ / Address" />
+        <input type="date" v-model="customer.date" placeholder="Ngày xem show/sự kiện" />
       </div>
 
       <!-- Lựa chọn thanh toán -->
       <div class="payment-method">
         <h3>LỰA CHỌN THANH TOÁN / PAYMENT METHOD</h3>
         <label>
-          <input type="radio" name="payment" value="vietqr" checked />
+          <input type="radio" v-model="selectedPayment" value="vietqr" />
           Chuyển khoản VietQR / Bank transfer VietQR
         </label>
         <label>
-        <input  type="radio" name="payment" value="tindung" checked />
-        Thanh toán bằng thẻ tín dụng / Creadit Cards
-      </label>
+          <input type="radio" v-model="selectedPayment" value="tindung" />
+          Thanh toán bằng thẻ tín dụng / Credit Cards
+        </label>
       </div>
 
       <!-- Giỏ hàng -->
@@ -52,7 +52,7 @@
           <input type="checkbox" v-model="agreeTerms" />
           Tôi đồng ý với các <a href="#">Điều khoản & Chính sách</a> của TicketProject
         </label>
-        <button :disabled="!agreeTerms" class="confirm-btn">
+        <button :disabled="!agreeTerms" @click="processPayment" class="confirm-btn">
           Tiếp tục thanh toán
         </button>
       </div>
@@ -68,6 +68,14 @@ export default {
   data() {
     return {
       agreeTerms: false,
+      selectedPayment: "vietqr", // Mặc định chọn VietQR
+      customer: {
+        name: "",
+        phone: "",
+        email: "",
+        address: "",
+        date: "",
+      },
       cartItems: [
         { id: 1, name: "Vé Ngày Thứ 2-6 | Khách >140cm", price: 190000, quantity: 0 },
         { id: 2, name: "Vé Ngày Thứ 2-6 | Khách 80-140cm", price: 140000, quantity: 0 },
@@ -91,6 +99,12 @@ export default {
     decreaseQuantity(item) {
       if (item.quantity > 0) item.quantity--;
     },
+    processPayment() {
+      if (!this.agreeTerms) return;
+      console.log("Thanh toán với:", this.selectedPayment);
+      console.log("Thông tin khách hàng:", this.customer);
+      console.log("Giỏ hàng:", this.cartItems);
+    },
   },
 };
 </script>
@@ -103,22 +117,33 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Làm tối nền khi popup mở */
+  background: rgba(0, 0, 0, 0.6); /* Tăng độ tối của overlay để nổi bật modal */
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 1050;
 }
 
 .modal-content {
   background: #fff;
   border-radius: 8px;
-  width: 90%;
-  max-width: 500px;
-  padding: 20px;
+  width: 80%; /* Mở rộng modal hơn để mọi thứ cân đối */
+  max-width: 1000px; /* Đảm bảo modal không quá rộng */
+  padding: 35px; /* Tăng padding để nội dung thoáng hơn */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   position: relative;
   animation: fadeIn 0.3s ease;
+}
+
+.modal-body {
+  display: flex;
+  gap: 30px;
+}
+
+
+.left-section,
+.right-section {
+  flex: 1;
 }
 
 .close-btn {
@@ -139,57 +164,63 @@ export default {
   margin-bottom: 20px;
 }
 
-h2 {
-  font-size: 15px; /* Giảm kích thước tiêu đề chính */
+.h2 {
+  font-size: 22px; /* Tăng kích thước để nổi bật hơn */
   font-weight: bold;
+  text-align: center; /* Căn giữa tiêu đề */
+  letter-spacing: 1px; /* Làm tiêu đề rõ ràng hơn */
+  text-transform: uppercase; /* Viết hoa để nổi bật */
 }
-h3 {
-  font-size: 15px; /* Giảm kích thước tiêu đề phụ */
+
+.h3 {
+  font-size: 13px;
   font-weight: bold;
+  color: #333;
 }
 
 input[type="text"],
 input[type="email"],
-input[type="date"],
-label {
+input[type="date"] {
   display: block;
-  width: 100%;
-  margin: 10px 0;
-  padding: 10px;
+  width: 100%; /* Input full width trong cột */
+  margin: 10px 0; /* Canh lề đẹp hơn */
+  padding: 12px;
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 14px;
 }
-
 input[type="radio"] {
   margin-right: 10px;
 }
 
-.cart-item {
+.payment-method label {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 10px 0; /* Thêm khoảng cách giữa các mục */
+  gap: 12px;
+  font-size: 16px; /* Tăng kích thước chữ để dễ đọc hơn */
 }
 
-.cart-item input {
-  width: 40px; /* Cố định độ rộng input */
-  height: 32px;
-  text-align: center;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px;
+.cart-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr; /* Cân chỉnh lại bố cục để tránh mất cân đối */
+  align-items: center;
+  padding: 12px 0;
 }
+.cart-item input {
+  width: 50px;
+  text-align: center;
+}
+
 .cart-item .quantity {
   display: flex;
   align-items: center;
-  gap: 5px; /* Khoảng cách giữa các nút */
+  gap: 5px; 
 }
 
 .cart-item .quantity button {
-  width: 32px; /* Đồng bộ kích thước */
+  width: 32px; 
   height: 32px;
-  background: darkorange; /* Giữ nguyên màu sắc */
+  background: #ff7f00; 
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -203,21 +234,24 @@ input[type="radio"] {
 }
 
 .cart-item .quantity button:hover {
-  background: #d17a00; /* Màu hover nhẹ hơn */
+  background: #d17a00; 
 }
+
 
 .confirm-btn {
   background: orange;
   color: #fff;
   border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
+  padding: 14px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px; /* Tăng kích thước nút để dễ thao tác hơn */
   display: block;
   width: 100%;
   text-align: center;
+  transition: background 0.3s ease; /* Thêm hiệu ứng hover */
 }
+
 
 .confirm-btn:disabled {
   background: #ccc;
@@ -230,10 +264,13 @@ input[type="radio"] {
 }
 
 .confirm a:hover {
-  text-decoration: underline;
+  text-decoration: underline; 
+}
+.confirm-btn:hover {
+  background: #d17a00;
 }
 
-/* Hiệu ứng mở popup */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
