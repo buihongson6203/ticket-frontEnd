@@ -150,7 +150,7 @@ body {
 
 /* Container chung */
 .tin-tuc-container {
-  max-width: 1400px !important;
+  max-width: 1600px ;
   margin: 0 auto;
   padding: 20px;
 }
@@ -214,7 +214,7 @@ body {
 
 /* Style cho các link (clickable-text) */
 .clickable-text {
-  font-size: 1.125em;
+  font-size: 12px;
   margin-bottom: 10px;
   color: inherit;
   text-decoration: none;
@@ -254,6 +254,7 @@ body {
 
 /* Style cho link "Xem thêm" */
 a.text-blue-600 {
+  font-size: 12px;
   font-weight: bold;
   color: #007bff;
   text-decoration: none;
