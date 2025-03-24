@@ -46,6 +46,7 @@
                     <option>Huế</option>
                     <option>Đà Nẵng</option>
                     <option>TP.Hồ Chí Minh</option>
+                    <option>Các thành phố khác</option>
                 </select>
             </div>
         </div>

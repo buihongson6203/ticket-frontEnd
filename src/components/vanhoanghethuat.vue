@@ -1,30 +1,29 @@
-<template>
-    <HeaderComponents />
-    <body>
-    <div class="container">
-        <!-- Main Event Section -->
-        <div class="main-event">
-    <div>
-        <img src="https://storage.googleapis.com/a1aa/image/wVt3zKvCAmIhVdD-8qFzzUYOH6KW51ktamX2LGZrJtA.jpg" alt="Main event image showing a theatrical performance">
-    </div>
-    <div class="main-event-details">
-        <h2>Madame de Đà Lạt</h2>
-        <div class="info">
-            <i class="fas fa-eye"></i> 1.365
-            <span>|</span>
-            <i class="fas fa-map-marker-alt"></i> Lâm Đồng
+    <template>
+        <HeaderComponents />
+        <body>
+        <div class="container">
+            <div class="main-event">
+        <div>
+            <img src="https://storage.googleapis.com/a1aa/image/wVt3zKvCAmIhVdD-8qFzzUYOH6KW51ktamX2LGZrJtA.jpg" alt="Main event image showing a theatrical performance">
         </div>
-        <div class="price">VND 50.000 +</div>
-        <p>i. thông tin chi tiết về madame de đà lạt thời gian: 07h30 - 17h30 tất cả các ngày trong tuần • khu một: 08h - 11h30, 13h30 - 16h30 tất cả các ngày trong tuần • khu biệt điện trần lệ xuân: 7h30 - 17h30 tất cả các ngày trong tuần • madame show: 18h30 - 19h30, thứ bảy hàng tuần địa điểm: madame de đà lạt, số 02 yết kiêu, phường 5, thành phố đà lạt, tỉnh lâm đồng sơ đồ tham quan chính: giá vé: gói lam ngọc • người lớn: 178.000vnd • trẻ em: 50.000vnd • người lớn khi đi kèm trẻ em: 100.000vnd • tham quan khu biệt điện trần lệ xuân • tham quan khu biệt thự trần lệ xuân • miễn phí...</p>
-        <!--Nút Mua-->
-        <button class="buy-now">ĐẶT VÉ NGAY</button>
+        <ThanhToanModal :isOpen="isModalOpen" @close="closeModal" />
+        <div class="main-event-details">
+            <h2>Madame de Đà Lạt</h2>
+            <div class="info">
+                <i class="fas fa-eye"></i> 1.365
+                <span>|</span>
+                <i class="fas fa-map-marker-alt"></i> Lâm Đồng
+            </div>
+            <div class="price">VND 50.000 +</div>
+            <p>i. thông tin chi tiết về madame de đà lạt thời gian: 07h30 - 17h30 tất cả các ngày trong tuần • khu một: 08h - 11h30, 13h30 - 16h30 tất cả các ngày trong tuần • khu biệt điện trần lệ xuân: 7h30 - 17h30 tất cả các ngày trong tuần • madame show: 18h30 - 19h30, thứ bảy hàng tuần địa điểm: madame de đà lạt, số 02 yết kiêu, phường 5, thành phố đà lạt, tỉnh lâm đồng sơ đồ tham quan chính: giá vé: gói lam ngọc • người lớn: 178.000vnd • trẻ em: 50.000vnd • người lớn khi đi kèm trẻ em: 100.000vnd • tham quan khu biệt điện trần lệ xuân • tham quan khu biệt thự trần lệ xuân • miễn phí...</p>
+
+            <button class="buy-now" @click="openModal">ĐẶT VÉ NGAY</button>
+        </div>
     </div>
-</div>
-        <!-- Events List Section -->
         <div class="events-list">
             <h3>Tổng số: 6 Sự kiện</h3>
             <div class="events-grid">
-                <!-- Event Card -->
+
                 <div class="event-card">
                     <img src="https://storage.googleapis.com/a1aa/image/nF7d6taKgb33Zf618e1-ujL7Rlvl88Jhdf7yDA8oD74.jpg" alt="Event image showing a digital art museum">
                     <div class="vanhoa-content">
@@ -37,10 +36,10 @@
                             <span>|</span>
                             <i class="fas fa-map-marker-alt"></i> Hà Nội
                         </div>
-                        <button class="book-btn">ĐẶT VÉ NGAY</button>
+                        <button class="book-btn" @click="openModal">ĐẶT VÉ NGAY</button>
+                        
                     </div>
                 </div>
-                <!-- Repeat Event Cards for each event -->
                 <div class="event-card">
                     <img src="https://storage.googleapis.com/a1aa/image/5S9tcQa8VzgKevNFOb6L02IDYbwbFJFCQc6aegjOwpU.jpg" alt="Event image showing a fashion exhibition">
                     <div class="vanhoa-content">
@@ -53,7 +52,7 @@
                             <span>|</span>
                             <i class="fas fa-map-marker-alt"></i> Hồ Chí Minh
                         </div>
-                        <button class="book-btn">ĐẶT VÉ NGAY</button>
+                        <button class="book-btn" @click="openModal">ĐẶT VÉ NGAY</button>
                     </div>
                 </div>
                 <div class="event-card">
@@ -68,7 +67,7 @@
                             <span>|</span>
                             <i class="fas fa-map-marker-alt"></i> Hồ Chí Minh
                         </div>
-                        <button class="book-btn">ĐẶT VÉ NGAY</button>
+                        <button class="book-btn" @click="openModal">ĐẶT VÉ NGAY</button>
                     </div>
                 </div>
                 <div class="event-card">
@@ -83,7 +82,7 @@
                             <span>|</span>
                             <i class="fas fa-map-marker-alt"></i> Lâm Đồng
                         </div>
-                        <button class="book-btn">ĐẶT VÉ NGAY</button>
+                        <button class="book-btn" @click="openModal">ĐẶT VÉ NGAY</button>
                     </div>
                 </div>
                 <div class="event-card">
@@ -98,7 +97,7 @@
                             <span>|</span>
                             <i class="fas fa-map-marker-alt"></i> Hà Nội
                         </div>
-                        <button class="book-btn">ĐẶT VÉ NGAY</button>
+                        <button class="book-btn" @click="openModal">ĐẶT VÉ NGAY</button>
                     </div>
                 </div>
                 <div class="event-card">
@@ -113,7 +112,7 @@
                             <span>|</span>
                             <i class="fas fa-map-marker-alt"></i> Hà Nội
                         </div>
-                        <button class="book-btn">ĐẶT VÉ NGAY</button>
+                    <button class="book-btn" @click="openModal">ĐẶT VÉ NGAY</button>
                     </div>
                 </div>
             </div>
@@ -122,21 +121,46 @@
 </body>
     <FooterComponents />
 
+
 </template>
 
 <script>
-import axios from 'axios';
-import HeaderComponents from './HeaderComponents';
-import FooterComponents from './FooterComponents';
+import { ref } from "vue";
+import HeaderComponents from "./HeaderComponents";
+import FooterComponents from "./FooterComponents";
+import ThanhToanModal from "./modal/thanhtoan-modal.vue";
 
 export default {
-    name: "van-hoanghethuat",
-    components: {
-        HeaderComponents, FooterComponents
-    },
+  name: "van-hoanghethuat",
+  components: {
+    HeaderComponents,
+    FooterComponents,
+    ThanhToanModal,
+  },
+  setup() {
+    const isModalOpen = ref(false);
 
-}
+    // Mở modal
+    const openModal = () => {
+      console.log("Mở modal");
+      isModalOpen.value = true;
+    };
+
+    // Đóng modal
+    const closeModal = () => {
+      console.log("Đóng modal");
+      isModalOpen.value = false;
+    };
+
+    return {
+      isModalOpen,
+      openModal,
+      closeModal,
+    };
+  },
+};
 </script>
+
 
 <style scoped>
 @import '/src/assets/vanhoa.css';
