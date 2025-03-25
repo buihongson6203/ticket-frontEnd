@@ -13,87 +13,50 @@
       </swiper>
       <!-- Indicators -->
       <div class="indicators">
-        <span class="indicator" :class="{ active: realIndex === index }" v-for="(item, index) in items" :key="index"
-          @click="jumpToSlide(index)"></span>
+        <span
+          class="indicator"
+          :class="{ active: realIndex === index }"
+          v-for="(item, index) in items"
+          :key="index"
+          @click="jumpToSlide(index)"
+        ></span>
       </div>
     </div>
 
     <!-- Phần Nội Dung Chính -->
-    <div class="bg-white text-gray-800">
-      <div class="tin-tuc-container mx-auto px-4 py-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <!-- Phần Hội Chợ & Triển Lãm -->
-          <div class="card">
-            <h2 class="text-xl font-bold text-orange-600 mb-4">HỘI CHỢ &amp; TRIỂN LÃM</h2>
+    <div class="main-content">
+      <div class="content-container">
+        <div class="grid-container">
+          <!-- Lặp qua từng category -->
+          <div class="card" v-for="(category, catIndex) in categories" :key="catIndex">
+            <h2 class="category-title">{{ category.name }}</h2>
             <img
-              alt="Colorful illustration of people dancing and celebrating with text 'Liên kết đào tạo Việt Nam - Hoa Kỳ'"
-              class="w-full mb-4 rounded-lg shadow-lg" height="300"
-              src="https://storage.googleapis.com/a1aa/image/XnB6xyHCXu26Hy5sQKZeCPx24NIc5wXlOn0rEgTTUrs.jpg"
-              width="600" />
-            <a href="#" class="feature-text clickable-text">Triển lãm các Chương trình Liên kết Đào tạo Việt Nam - Hoa Kỳ 2025.</a>
-            <div class="mb-4">
-              <div class="flex items-start mb-2">
-                <img alt="Exhibition poster with text 'Triển lãm Mê man'" class="w-24 h-16 mr-4 rounded-lg object-cover"
-                  height="60" src="https://storage.googleapis.com/a1aa/image/P8BzlfhIwTb4J0t_BfuU9wBFEHB8Xg9mVYgTPzuv09Q.jpg"
-                  width="100" />
-                <a href="#" class="clickable-text">Triển lãm Mê man</a>
-              </div>
-              <div class="flex items-start mb-2">
-                <img alt="Exhibition poster with text 'The world as a draft'" class="w-24 h-16 mr-4 rounded-lg object-cover"
-                  height="60" src="https://storage.googleapis.com/a1aa/image/d6dfhZLl5f17BYCOwWUKnKmRs5IcaAP3hlcvhyf3P08.jpg"
-                  width="100" />
-                <a href="#" class="clickable-text">Triển lãm THẾ GIỚI NHƯ LÀ BẢN NHÁP - Đỗ Thanh Lãng &amp; Nguyễn Đức Đạt</a>
-              </div>
-              <div class="flex items-start mb-2">
-                <img alt="Exhibition poster with text 'Retro Rewind'" class="w-24 h-16 mr-4 rounded-lg object-cover"
-                  height="60" src="https://storage.googleapis.com/a1aa/image/UZ1IteGN_Vb0N2T8LEYVkro2cAWQEZLC8bNOcMSA8W8.jpg"
-                  width="100" />
-                <a href="#" class="clickable-text">Hội chợ rong chơi vol 13: Retro Rewind</a>
-              </div>
-              <div class="flex items-start mb-2">
-                <img alt="Exhibition poster with text 'Xuân an lành - Chơi vui khỏe'" class="w-24 h-16 mr-4 rounded-lg object-cover"
-                  height="60" src="https://i.ex-cdn.com/vntravellive.com/files/news/2019/05/02/the-gioi-den-long-ruc-ro-o-hoi-an-161742.jpg"
-                  width="100" />
-                <a href="#" class="clickable-text">Hội chợ 2025: Xuân an lành - Chơi vui khỏe</a>
+              v-if="category.events.length > 0"
+              :alt="category.events[0].title"
+              class="feature-image"
+              :src="getImageUrl(category.events[0].image)"
+            />
+            <a
+              v-if="category.events.length > 0"
+              href="#"
+              class="feature-text"
+              >{{ category.events[0].title }}</a
+            >
+            <div class="event-list">
+              <div
+                class="event-item"
+                v-for="(event, eventIndex) in category.events.slice(1)"
+                :key="eventIndex"
+              >
+                <img
+                  :alt="event.title"
+                  class="event-image"
+                  :src="getImageUrl(event.image)"
+                />
+                <a href="#" class="event-title">{{ event.title }}</a>
               </div>
             </div>
-            <a class="text-blue-600 hover:underline" href="#">Xem thêm</a>
-          </div>
-
-          <!-- Phần Âm Nhạc - Music Shows -->
-          <div class="card">
-            <h2 class="text-xl font-bold text-orange-600 mb-4">ÂM NHẠC - MUSIC SHOWS</h2>
-            <img alt="Poster of a music show with a woman in a red dress and text 'HLALAH Xóm Nhạc'"
-              class="w-full mb-4 rounded-lg shadow-lg" height="300"
-              src="https://storage.googleapis.com/a1aa/image/H5yubsxsakUQfs5o7OeyT92QkbhSOP90BFHw__NnjnA.jpg"
-              width="600" />
-            <a href="#" class="feature-text clickable-text">Đêm nhạc Halah - Xóm Nhạc - Ngày 20.03.2025</a>
-            <div class="mb-4">
-              <div class="flex items-start mb-2">
-                <img alt="Concert poster with text 'Rock Trống Taiko'" class="w-24 h-16 mr-4 rounded-lg object-cover"
-                  height="60" src="https://file3.qdnd.vn/data/images/0/2022/10/24/vuhuyen/nhac-vien.jpg?dpi=150&quality=100&w=870"
-                  width="100" />
-                <a href="#" class="clickable-text">Hòa nhạc Rock Trống Taiko đến từ Nhật Bản cùng BATI-HOLIC tại Hà Nội và Hồ Chí Minh 2025</a>
-              </div>
-              <div class="flex items-start mb-2">
-                <img alt="Concert poster with text 'MÙA XUÂN ĐẦU TIÊN'" class="w-24 h-16 mr-4 rounded-lg object-cover"
-                  height="60" src="https://storage.googleapis.com/a1aa/image/94Urb7UifENDYEK1zDDcfy7Ca7uMnjCcb4vuveA8x-0.jpg"
-                  width="100" />
-                <a href="#" class="clickable-text">Salon Âm nhạc thính phòng tháng 3.2025 Chủ đề: MÙA XUÂN ĐẦU TIÊN</a>
-              </div>
-              <div class="flex items-start mb-2">
-                <img alt="Concert poster with text 'Linkin Park Cover Show'" class="w-24 h-16 mr-4 rounded-lg object-cover"
-                  height="60" src="https://storage.googleapis.com/a1aa/image/PdhAmQ3NFJAQ0sd7_ysX6-uNhNUl6UZdbVfxhCiqI2g.jpg"
-                  width="100" />
-                <a href="#" class="clickable-text">Đêm nhạc Linkin Park Cover Show - A place for our heads</a>
-              </div>
-              <div class="flex items-start mb-2">
-                <img alt="Concert poster with text 'Women of Rock'" class="w-24 h-16 mr-4 rounded-lg object-cover"
-                  height="60" src="https://wallpapercave.com/wp/wp9264044.jpg" width="100" />
-                <a href="#" class="clickable-text">Women of Rock - Đêm nhạc tôn vinh những nữ rocker huyền thoại | Avril Lavigne - Paramore - The Pretty Reckless</a>
-              </div>
-            </div>
-            <a class="text-blue-600 hover:underline" href="#">Xem thêm</a>
+            <a class="view-more" href="#">Xem thêm</a>
           </div>
         </div>
       </div>
@@ -106,163 +69,204 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import HeaderComponents from './HeaderComponents.vue';
 import FooterComponents from './FooterComponents.vue';
-import axios from 'axios';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/swiper-bundle.css';
 
-const items = ref([]);
-const baseApiUrl = process.env.VUE_APP_BASE_API_URL || 'http://localhost:3000';
-
+// Swiper options
 const swiperOptions = {
   loop: true,
-  pagination: {
-    clickable: true,
+  autoplay: {
+    delay: 3000,
   },
-  navigation: true,
 };
 
-const fetchItems = async () => {
+// Dữ liệu cho Swiper (sẽ được cập nhật từ API)
+const items = ref([]);
+const realIndex = ref(0);
+
+const jumpToSlide = (index) => {
+  realIndex.value = index;
+};
+
+// Dữ liệu động từ API
+const categories = ref([]);
+
+// Hàm tạo URL đầy đủ cho ảnh
+const getImageUrl = (imagePath) => {
+  return imagePath ? `http://localhost:3000${imagePath}` : 'https://via.placeholder.com/600x300';
+};
+
+// Hàm gọi API và tạo dữ liệu cho Swiper
+const fetchCategories = async () => {
   try {
-    const response = await axios.get(`${baseApiUrl}/items`); // Thay đổi đường dẫn API nếu cần
-    items.value = response.data; // Giả định rằng API trả về dữ liệu theo định dạng mà bạn cần
+    const response = await fetch('http://localhost:3000/categories/list');
+    const result = await response.json();
+    categories.value = result.data.filter((cat) => cat.events.length > 0);
+
+    // Lấy tất cả events từ các categories
+    const allEvents = categories.value.flatMap((category) => category.events);
+
+    // Tạo mảng items cho Swiper từ events
+    items.value = allEvents.map((event) => ({
+      src: getImageUrl(event.image), // Dùng image từ event
+      alt: event.title, // Dùng title làm alt
+      caption: event.title, // Dùng title làm caption
+    }));
   } catch (error) {
-    console.error('Lỗi khi gọi API:', error);
+    console.error('Error fetching categories:', error);
   }
 };
 
-onMounted(fetchItems);
+onMounted(() => {
+  fetchCategories();
+});
 </script>
 
 <style scoped>
-/* Reset & cơ bản */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: #f8f9fa;
-  color: #333;
-}
-
-/* Container chung */
-.tin-tuc-container {
-  max-width: 1600px ;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-/* Style cho Swiper Container */
+/* Swiper styles */
 .swiper-container {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.swiper-container img {
   width: 100%;
-  height: 300px;
+  height: 400px; /* Chiều cao slide */
+  object-fit: cover; /* Đảm bảo ảnh không bị méo */
 }
-
 .caption {
-  text-align: center;
-  color: #2d3748;
-  margin-top: 0.5rem;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 500;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
 }
-
-/* Style cho Indicators */
 .indicators {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+  text-align: center;
+  margin-top: 10px;
 }
-
 .indicator {
+  display: inline-block;
   width: 10px;
   height: 10px;
-  background-color: #cbd5e0;
+  background-color: #ccc;
   border-radius: 50%;
   margin: 0 5px;
   cursor: pointer;
 }
-
 .indicator.active {
-  background-color: #2d3748;
+  background-color: #f97316;
 }
 
-/* Style cho Grid (nội dung phía dưới slider) */
-.grid {
+/* Main content styles */
+.main-content {
+  background-color: #f5f5f5; /* Màu nền xám nhạt giống hình */
+  color: #4b5563; /* Màu chữ xám đậm */
+  padding: 3rem 0; /* Khoảng cách trên dưới */
+}
+
+/* Content container */
+.content-container {
+  max-width: 1400px; /* Giới hạn chiều rộng */
+  margin: 0 auto;
+  padding: 0 1rem; /* Khoảng cách trái phải */
+}
+
+/* Grid layout */
+.grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(1, 1fr); /* 1 cột trên màn hình nhỏ */
+  gap: 2rem; /* Khoảng cách giữa các card */
+}
+@media (min-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 cột trên màn hình lớn */
+  }
 }
 
-/* Style cho Card */
+/* Card styles */
 .card {
-  background: #fff;
-  padding: 16px;
-  border-radius: 12px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
+  border-radius: 0.5rem; /* Bo góc */
+  padding: 1rem; /* Khoảng cách bên trong */
 }
 
-.card:hover {
-  transform: translateY(-5px);
+/* Category title */
+.category-title {
+  font-size:24px; /* Kích thước chữ 20px */
+  font-weight: 700; /* Chữ đậm */
+  color: #f97316; /* Màu cam */
+  margin-bottom: 1rem; /* Khoảng cách dưới */
+  position: relative;
+  padding-left: 1rem; /* Khoảng cách trái để chừa chỗ cho thanh dọc */
+}
+.category-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px; /* Thanh dọc màu cam */
+  background-color: #f97316;
 }
 
-.card img {
+/* Feature image */
+.feature-image {
   width: 100%;
-  border-radius: 8px;
+  height: 200px; /* Chiều cao cố định giống hình */
+  object-fit: cover; /* Đảm bảo ảnh không bị méo */
+  border-radius: 0.5rem; /* Bo góc */
+  margin-bottom: 1rem; /* Khoảng cách dưới */
 }
 
-/* Style cho các link (clickable-text) */
-.clickable-text {
-  font-size: 12px;
-  margin-bottom: 10px;
-  color: inherit;
-  text-decoration: none;
-  transition: color 0.2s ease-in-out;
+/* Feature text */
+.feature-text {
   display: block;
-  font-weight: bold;
+  font-size: 20px; 
+  font-weight: 600; 
+  color: #4b5563; 
+  margin-bottom: 1rem; 
 }
-
-.clickable-text:hover {
-  color: #0056b3;
+.feature-text:hover {
   text-decoration: underline;
 }
 
-/* Style cho Feature Text (tăng kích thước chữ và đứng dòng riêng) */
-.feature-text {
-  font-size: 1.25em;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  display: block;
-  font-weight: bold;
+/* Event list */
+.event-list {
+  margin-bottom: 1rem; /* Khoảng cách dưới */
 }
-
-/* Style cho Flex (ảnh nhỏ và text bên cạnh) */
-.flex {
+.event-item {
   display: flex;
-  align-items: flex-start;
-  margin-bottom: 12px;
+  align-items: flex-start; /* Căn chỉnh đầu dòng */
+  margin-bottom: 0.5rem; /* Khoảng cách giữa các item */
+}
+.event-image {
+  width: 150px; /* Kích thước ảnh nhỏ */
+  height: 70px;
+  object-fit: cover; /* Đảm bảo ảnh không bị méo */
+  border-radius: 0.25rem; /* Bo góc nhẹ */
+  margin-right: 1rem; /* Khoảng cách phải */
+}
+.event-title {
+  color: #4b5563; /* Màu xám đậm */
+  font-size: 0.95rem; /* Kích thước chữ nhỏ */
+  line-height: 1.4; /* Khoảng cách dòng */
+}
+.event-title:hover {
+  text-decoration: underline;
 }
 
-.flex img {
-  width: 100px;
-  height: 60px;
-  border-radius: 6px;
-  margin-right: 12px;
-  object-fit: cover;
+/* View more link */
+.view-more {
+  color: #2563eb; /* Màu xanh */
+  font-size: 0.9rem; /* Kích thước chữ nhỏ */
 }
-
-/* Style cho link "Xem thêm" */
-a.text-blue-600 {
-  font-size: 12px;
-  font-weight: bold;
-  color: #007bff;
-  text-decoration: none;
-  transition: color 0.2s ease-in-out;
-}
-
-a.text-blue-600:hover {
-  color: #0056b3;
+.view-more:hover {
   text-decoration: underline;
 }
 </style>
