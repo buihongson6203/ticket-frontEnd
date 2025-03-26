@@ -245,3 +245,23 @@ header h1:hover {
   font-size: 18px; /* Icon tiền đồng bộ kích thước */
   color: #27ae60;
 }
+
+.view-more{
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+/* Style cho nút "Xem thêm" */
+.view-more-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.view-more-btn:hover {
+  background-color: #0056b3;
+}
