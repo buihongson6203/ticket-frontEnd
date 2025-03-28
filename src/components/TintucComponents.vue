@@ -1,272 +1,327 @@
 <template>
   <div>
-    <!-- Component Header -->
+    <!-- Tiêu đề của component -->
     <HeaderComponents />
 
-    <!-- Swiper Container -->
-    <div class="swiper-container">
-      <swiper :options="swiperOptions">
+    <!-- Container cho Swiper -->
+    <div class="swiper-container-tintuc">
+      <swiper :options="swiperOptions" @slideChange="onSlideChange">
+        <!-- Lặp qua từng item trong mảng items -->
         <swiper-slide v-for="(item, index) in items" :key="index">
           <img :src="item.src" :alt="item.alt" />
-          <p class="caption">{{ item.caption }}</p>
+          <p class="caption-tintuc">{{ item.caption }}</p> 
         </swiper-slide>
       </swiper>
-      <!-- Indicators -->
-      <div class="indicators">
-        <span
-          class="indicator"
-          :class="{ active: realIndex === index }"
-          v-for="(item, index) in items"
-          :key="index"
+      <!-- Chỉ số điều hướng -->
+      <div class="indicators-tintuc">
+        <span 
+          class="indicator-tintuc" 
+          :class="{ active: realIndex === index }" 
+          v-for="(item, index) in items" 
+          :key="index" 
           @click="jumpToSlide(index)"
         ></span>
       </div>
     </div>
 
     <!-- Phần Nội Dung Chính -->
-    <div class="main-content">
-      <div class="content-container">
-        <div class="grid-container">
-          <!-- Lặp qua từng category -->
-          <div class="card" v-for="(category, catIndex) in categories" :key="catIndex">
-            <h2 class="category-title">{{ category.name }}</h2>
-            <img
-              v-if="category.events.length > 0"
-              :alt="category.events[0].title"
-              class="feature-image"
-              :src="getImageUrl(category.events[0].image)"
+    <div class="main-content-tintuc">
+      <div class="content-container-tintuc">
+        <div class="grid-container-tintuc">
+          <!-- Lặp qua từng danh mục -->
+          <div class="card-tintuc" v-for="(category, catIndex) in categories" :key="catIndex">
+            <h2 class="category-title-tintuc">{{ category.name }}</h2>
+            <!-- Hiển thị hình ảnh nổi bật nếu có sự kiện -->
+            <img 
+              v-if="category.events.length > 0" 
+              :alt="category.events[0].title" 
+              class="feature-image-tintuc" 
+              :src="getImageUrl(category.events[0].image)" 
             />
-            <a
-              v-if="category.events.length > 0"
-              href="#"
-              class="feature-text"
-              >{{ category.events[0].title }}</a
-            >
-            <div class="event-list">
-              <div
-                class="event-item"
-                v-for="(event, eventIndex) in category.events.slice(1)"
+            <a 
+              v-if="category.events.length > 0" 
+              href="#" 
+              class="feature-text-tintuc"
+            >{{ category.events[0].title }}</a>
+            <div class="event-list-tintuc">
+              <!-- Lặp qua từng sự kiện trong danh mục -->
+              <div 
+                class="event-item-tintuc" 
+                v-for="(event, eventIndex) in category.events.slice(1)" 
                 :key="eventIndex"
               >
-                <img
-                  :alt="event.title"
-                  class="event-image"
-                  :src="getImageUrl(event.image)"
+                <img 
+                  :alt="event.title" 
+                  class="event-image-tintuc" 
+                  :src="getImageUrl(event.image)" 
                 />
-                <a href="#" class="event-title">{{ event.title }}</a>
+                <a href="#" class="event-title-tintuc">{{ truncateTitle(event.title) }}</a>
               </div>
             </div>
-            <a class="view-more" href="#">Xem thêm</a>
+            <a class="view-more-tintuc" href="#">Xem thêm</a>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Component Footer -->
+    <!-- Chân trang của component -->
     <FooterComponents />
   </div>
 </template>
 
 <script setup>
+// Import các thư viện và component cần thiết
 import { ref, onMounted } from 'vue';
 import HeaderComponents from './HeaderComponents.vue';
 import FooterComponents from './FooterComponents.vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/swiper-bundle.css';
 
-// Swiper options
+// Tùy chọn cho Swiper
 const swiperOptions = {
-  loop: true,
+  loop: true, // Lặp lại các slide
   autoplay: {
-    delay: 3000,
+    delay: 3000, // Thời gian giữa các slide (3000ms)
   },
 };
 
-// Dữ liệu cho Swiper (sẽ được cập nhật từ API)
-const items = ref([]);
-const realIndex = ref(0);
+// Khai báo biến reactive cho dữ liệu
+const items = ref([]); // Mảng chứa các item cho Swiper
+const realIndex = ref(0); // Chỉ số slide hiện tại
 
+// Hàm nhảy đến slide tương ứng
 const jumpToSlide = (index) => {
-  realIndex.value = index;
+  realIndex.value = index; // Cập nhật chỉ số slide
+};
+
+// Hàm xử lý khi slide thay đổi
+const onSlideChange = (swiper) => {
+  realIndex.value = swiper.activeIndex; // Cập nhật chỉ số hiện tại
 };
 
 // Dữ liệu động từ API
-const categories = ref([]);
+const categories = ref([]); // Mảng chứa các danh mục
 
 // Hàm tạo URL đầy đủ cho ảnh
 const getImageUrl = (imagePath) => {
-  return imagePath ? `http://localhost:3000${imagePath}` : 'https://via.placeholder.com/600x300';
+  return imagePath ? `http://localhost:3000${imagePath}` : 'https://via.placeholder.com/600x300'; // Trả về URL ảnh
+};
+
+// Hàm cắt văn bản và thêm dấu "..."
+const truncateTitle = (title) => {
+  return title.length > 50 ? title.slice(0, 50) + '...' : title; // Cắt tiêu đề nếu dài hơn 50 ký tự
 };
 
 // Hàm gọi API và tạo dữ liệu cho Swiper
 const fetchCategories = async () => {
   try {
-    const response = await fetch('http://localhost:3000/categories/list');
-    const result = await response.json();
-    categories.value = result.data.filter((cat) => cat.events.length > 0);
+    const response = await fetch('http://localhost:3000/categories/list'); // Gọi API để lấy danh mục
+    const result = await response.json(); // Chuyển đổi phản hồi thành JSON
+    categories.value = result.data.filter((cat) => cat.events.length > 0); // Lọc danh mục có sự kiện
 
-    // Lấy tất cả events từ các categories
+    // Lấy tất cả sự kiện từ các danh mục
     const allEvents = categories.value.flatMap((category) => category.events);
 
-    // Tạo mảng items cho Swiper từ events
+    // Tạo mảng items cho Swiper từ sự kiện
     items.value = allEvents.map((event) => ({
       src: getImageUrl(event.image), // Dùng image từ event
       alt: event.title, // Dùng title làm alt
       caption: event.title, // Dùng title làm caption
     }));
   } catch (error) {
-    console.error('Error fetching categories:', error);
+    console.error('Error fetching categories:', error); // Xử lý lỗi khi gọi API
   }
 };
 
+// Gọi hàm fetchCategories khi component được mount
 onMounted(() => {
   fetchCategories();
 });
 </script>
 
 <style scoped>
-/* Swiper styles */
-.swiper-container {
-  position: relative;
+/* Các kiểu dáng cho Swiper */
+.swiper-container-tintuc {
+  position: relative; /* Đặt vị trí tương đối cho container */
   max-width: 1400px;
   margin: 0 auto;
+  border-radius: 10px; /* Bo viền cho container */
+  overflow: hidden; /* Ẩn phần thừa */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
 }
-.swiper-container img {
+
+.swiper-container-tintuc img {
   width: 100%;
-  height: 400px; /* Chiều cao slide */
-  object-fit: cover; /* Đảm bảo ảnh không bị méo */
+  height: 400px;
+  object-fit: cover;
+  transition: transform 0.5s ease; /* Hiệu ứng chuyển động */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Đổ bóng cho hình ảnh */
 }
-.caption {
+
+.swiper-container-tintuc img:hover {
+  transform: scale(1.05); /* Phóng to hình ảnh khi hover */
+}
+
+.caption-tintuc {
   position: absolute;
   bottom: 20px;
   left: 20px;
   color: #fff;
-  font-size: 1.2rem;
-  font-weight: 500;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
+  font-size: 1.5rem; /* Tăng kích thước chữ */
+  font-weight: 600; /* Chữ đậm hơn */
+  background-color: rgba(0, 0, 0, 0.6); /* Nền tối hơn */
+  padding: 0.75rem 1.25rem; /* Khoảng cách bên trong lớn hơn */
+  border-radius: 0.5rem; /* Bo góc cho caption */
 }
-.indicators {
-  text-align: center;
-  margin-top: 10px;
+
+/* Chỉ số điều hướng */
+.indicators-tintuc {
+  position: absolute; /* Đặt vị trí tuyệt đối */
+  bottom: 20px; /* Cách dưới 20px từ dưới */
+  left: 50%; /* Căn giữa theo chiều ngang */
+  transform: translateX(-50%); /* Đưa nó về giữa */
+  display: flex; /* Sử dụng flexbox để căn giữa */
+  gap: 10px; /* Khoảng cách giữa các chỉ số */
+  z-index: 10; /* Đảm bảo nó hiển thị trên ảnh */
 }
-.indicator {
+
+.indicator-tintuc {
   display: inline-block;
-  width: 10px;
-  height: 10px;
-  background-color: #ccc;
+  width: 12px; /* Tăng kích thước */
+  height: 12px;
+  background-color: #ccc; 
   border-radius: 50%;
-  margin: 0 5px;
   cursor: pointer;
-}
-.indicator.active {
-  background-color: #f97316;
+  transition: background-color 0.3s; /* Hiệu ứng chuyển màu */
 }
 
-/* Main content styles */
-.main-content {
-  background-color: #f5f5f5; /* Màu nền xám nhạt giống hình */
-  color: #4b5563; /* Màu chữ xám đậm */
-  padding: 3rem 0; /* Khoảng cách trên dưới */
+.indicator-tintuc:hover {
+  background-color: #f97316; /* Màu hover */
 }
 
-/* Content container */
-.content-container {
-  max-width: 1400px; /* Giới hạn chiều rộng */
+.indicator-tintuc.active {
+  background-color: #f97316; /* Màu nền cho chỉ số đang hoạt động */
+}
+
+/* Các kiểu dáng cho nội dung chính */
+.main-content-tintuc {
+  color: #333333; /* Màu chữ tối hơn */
+  padding: 2rem 0; /* Thêm khoảng cách trên và dưới */
+}
+
+/* Container cho nội dung */
+.content-container-tintuc {
+  max-width: 1350px;
   margin: 0 auto;
-  padding: 0 1rem; /* Khoảng cách trái phải */
+  padding: 2rem; /* Thêm padding cho nội dung */
 }
 
-/* Grid layout */
-.grid-container {
+/* Bố cục lưới */
+.grid-container-tintuc {
   display: grid;
-  grid-template-columns: repeat(1, 1fr); /* 1 cột trên màn hình nhỏ */
-  gap: 2rem; /* Khoảng cách giữa các card */
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+  margin-top: 2rem; /* Khoảng cách trên */
 }
+
 @media (min-width: 768px) {
-  .grid-container {
-    grid-template-columns: repeat(2, 1fr); /* 2 cột trên màn hình lớn */
+  .grid-container-tintuc {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Card styles */
-.card {
-  border-radius: 0.5rem; /* Bo góc */
-  padding: 1rem; /* Khoảng cách bên trong */
+/* Các kiểu dáng cho card */
+.card-tintuc {
+  background: white; /* Màu nền trắng cho card */
+  border-radius: 8px; /* Bo góc cho card */
+  padding: 1.5rem; /* Thêm padding cho card */
+  transition: transform 0.3s, box-shadow 0.3s; /* Hiệu ứng chuyển động */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng cho card */
 }
 
-/* Category title */
-.category-title {
-  font-size:24px; /* Kích thước chữ 20px */
-  font-weight: 700; /* Chữ đậm */
-  color: #f97316; /* Màu cam */
+.card-tintuc:hover {
+  transform: translateY(-5px); /* Nâng card lên khi hover */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Đổ bóng mạnh hơn khi hover */
+}
+
+/* Tiêu đề danh mục */
+.category-title-tintuc {
+  font-size: 30px; /* Tăng kích thước chữ */
+  font-weight: 700; /* Độ đậm của chữ */
+  color: #f97316; /* Màu sắc của chữ */
   margin-bottom: 1rem; /* Khoảng cách dưới */
-  position: relative;
-  padding-left: 1rem; /* Khoảng cách trái để chừa chỗ cho thanh dọc */
-}
-.category-title::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 4px; /* Thanh dọc màu cam */
-  background-color: #f97316;
+  position: relative; /* Đặt vị trí tương đối */
+  padding-left: 1rem; /* Khoảng cách bên trái */
+  border-left: 4px solid #f97316; /* Thanh dọc bên trái */
+  padding-left: 1.5rem; /* Thêm khoảng cách bên trái */
 }
 
-/* Feature image */
-.feature-image {
+/* Hình ảnh nổi bật */
+.feature-image-tintuc {
   width: 100%;
-  height: 200px; /* Chiều cao cố định giống hình */
-  object-fit: cover; /* Đảm bảo ảnh không bị méo */
-  border-radius: 0.5rem; /* Bo góc */
-  margin-bottom: 1rem; /* Khoảng cách dưới */
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng cho hình ảnh nổi bật */
 }
 
-/* Feature text */
-.feature-text {
+/* Văn bản nổi bật */
+.feature-text-tintuc {
   display: block;
-  font-size: 20px; 
-  font-weight: 600; 
-  color: #4b5563; 
-  margin-bottom: 1rem; 
+  font-size: 28px; /* Tăng kích thước chữ */
+  font-weight: 600;
+  color: #4b5563;
+  margin-bottom: 1rem;
+  transition: color 0.3s; /* Hiệu ứng chuyển màu */
 }
-.feature-text:hover {
+
+.feature-text-tintuc:hover {
+  color: #f97316; /* Đổi màu chữ khi hover */
   text-decoration: underline;
 }
 
-/* Event list */
-.event-list {
-  margin-bottom: 1rem; /* Khoảng cách dưới */
+/* Danh sách sự kiện */
+.event-list-tintuc {
+  margin-bottom: 1rem;
 }
-.event-item {
+
+.event-item-tintuc {
   display: flex;
-  align-items: flex-start; /* Căn chỉnh đầu dòng */
-  margin-bottom: 0.5rem; /* Khoảng cách giữa các item */
+  margin-bottom: 1.5rem;
 }
-.event-image {
-  width: 150px; /* Kích thước ảnh nhỏ */
+
+.event-image-tintuc {
+  width: 150px;
   height: 70px;
-  object-fit: cover; /* Đảm bảo ảnh không bị méo */
-  border-radius: 0.25rem; /* Bo góc nhẹ */
-  margin-right: 1rem; /* Khoảng cách phải */
+  object-fit: cover;
+  border-radius: 0.5rem;
+  margin: 0 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng cho hình ảnh sự kiện */
 }
-.event-title {
-  color: #4b5563; /* Màu xám đậm */
-  font-size: 0.95rem; /* Kích thước chữ nhỏ */
-  line-height: 1.4; /* Khoảng cách dòng */
+
+.event-title-tintuc {
+  color: #4b5563;
+  font-size: 20px;
+  line-height: 1.5; /* Khoảng cách dòng */
+  transition: color 0.3s; /* Hiệu ứng chuyển màu */
 }
-.event-title:hover {
+
+.event-title-tintuc:hover {
+  color: #f97316; /* Đổi màu chữ khi hover */
   text-decoration: underline;
 }
 
-/* View more link */
-.view-more {
-  color: #2563eb; /* Màu xanh */
-  font-size: 0.9rem; /* Kích thước chữ nhỏ */
+/* Liên kết xem thêm */
+.view-more-tintuc {
+  color: #2563eb;
+  font-size: 16px; /* Tăng kích thước chữ */
+  font-weight: 500; /* Tăng độ đậm */
+  transition: color 0.3s; /* Hiệu ứng chuyển màu */
 }
-.view-more:hover {
+
+.view-more-tintuc:hover {
+  color: #f97316; /* Đổi màu chữ khi hover */
   text-decoration: underline;
 }
 </style>
