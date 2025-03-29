@@ -82,6 +82,7 @@ const swiperOptions = {
   loop: true, // Lặp lại các slide
   autoplay: {
     delay: 3000, // Thời gian giữa các slide (3000ms)
+    disableOnInteraction: false, // Không dừng autoplay khi người dùng tương tác
   },
 };
 
@@ -163,15 +164,7 @@ onMounted(() => {
 }
 
 .caption-tintuc {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  color: #fff;
-  font-size: 1.5rem; /* Tăng kích thước chữ */
-  font-weight: 600; /* Chữ đậm hơn */
-  background-color: rgba(0, 0, 0, 0.6); /* Nền tối hơn */
-  padding: 0.75rem 1.25rem; /* Khoảng cách bên trong lớn hơn */
-  border-radius: 0.5rem; /* Bo góc cho caption */
+  display: none; /* Ẩn hoàn toàn phần tử */
 }
 
 /* Chỉ số điều hướng */
@@ -221,7 +214,6 @@ onMounted(() => {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 2rem;
-  margin-top: 2rem; /* Khoảng cách trên */
 }
 
 @media (min-width: 768px) {
