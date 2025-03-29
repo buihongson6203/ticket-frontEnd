@@ -16,7 +16,6 @@
             </div>
             <div class="price">VND 50.000 +</div>
             <p>i. thông tin chi tiết về madame de đà lạt thời gian: 07h30 - 17h30 tất cả các ngày trong tuần • khu một: 08h - 11h30, 13h30 - 16h30 tất cả các ngày trong tuần • khu biệt điện trần lệ xuân: 7h30 - 17h30 tất cả các ngày trong tuần • madame show: 18h30 - 19h30, thứ bảy hàng tuần địa điểm: madame de đà lạt, số 02 yết kiêu, phường 5, thành phố đà lạt, tỉnh lâm đồng sơ đồ tham quan chính: giá vé: gói lam ngọc • người lớn: 178.000vnd • trẻ em: 50.000vnd • người lớn khi đi kèm trẻ em: 100.000vnd • tham quan khu biệt điện trần lệ xuân • tham quan khu biệt thự trần lệ xuân • miễn phí...</p>
-
             <button class="buy-now" @click="openModal">ĐẶT VÉ NGAY</button>
         </div>
     </div>
