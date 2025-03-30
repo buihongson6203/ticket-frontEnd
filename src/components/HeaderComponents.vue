@@ -33,7 +33,7 @@
     <div class="navbar">
         <div class="header-container">
             <div class="link-header">
-                <a href="#">Vé ca nhạc</a>
+                <a href="http://localhost:8080/canhac">Vé ca nhạc</a>
                 <a href="http://localhost:8080/vanhoa">Văn hóa nghệ thuật</a>
                 <a href="#">Du lịch</a>
                 <a href="#">Vé tham quan</a>

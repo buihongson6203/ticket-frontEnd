@@ -17,6 +17,10 @@ import Vanhoanghethuat from './components/vanhoanghethuat.vue';
 import DetailEvent from './views/DetailEvent.vue';
 import WeeklyEvents from './views/WeeklyEvents.vue';
 import TintucView from './views/TintucView.vue';
+import Vecanhac from './components/Vecanhac.vue';
+
+
+
 
 
 
@@ -110,14 +114,20 @@ const routes = [
     {
         path: '/weekly-events',
         name: 'WeeklyEvents',
-        component: WeeklyEvents
+        component: WeeklyEvents,
     },
     {
         path: '/tintuc',
         name: 'TintucView',
         component: TintucView,
+    },
+    {
+        path: '/canhac',
+        name: 'Vecanhac',
+        component: Vecanhac,
     }
-
+    
+    
 ]
 
 const router = createRouter({
