@@ -14,16 +14,8 @@
                 </select>
 
                 <label>Rating:</label>
-                <star-rating 
-                    :rating="review.rating"
-                    @update:rating="setRating"
-                    :increment="1"
-                    :max-rating="5"
-                    :show-rating="true"
-                    active-color="#ff9800"
-                    inactive-color="#ddd"
-                    class="star-rating"
-                ></star-rating>
+                <star-rating :rating="review.rating" @update:rating="setRating" :increment="1" :max-rating="5"
+                    :show-rating="true" active-color="#ff9800" inactive-color="#ddd" class="star-rating"></star-rating>
 
                 <label>Comment:</label>
                 <textarea v-model="review.comment" required></textarea>
@@ -43,19 +35,34 @@
     </div>
 </template>
 
-
 <script setup>
 import { ref, watch, defineProps, defineEmits } from "vue";
 import axios from "axios";
-import StarRating from 'vue-star-rating'
+import StarRating from "vue-star-rating";
+import toastr from "toastr";
 
+// Cấu hình toastr
+toastr.options = {
+    closeButton: true,
+    progressBar: true,
+    positionClass: "toast-top-right", // Thử đổi vị trí
+    timeOut: 3000,
+    extendedTimeOut: 1000,
+    showMethod: "fadeIn",
+    hideMethod: "fadeOut",
+    onShown: function () {
+        document.querySelectorAll(".toast").forEach((toast) => {
+            toast.style.zIndex = "99999";
+        });
+    },
+};
 
 const props = defineProps(["isOpen"]);
 const emit = defineEmits(["close"]);
 
 const review = ref({
     eventId: "",
-    rating: 0, // ⚠️ Đảm bảo không null để tránh lỗi
+    rating: 0,
     comment: "",
     phone: "",
     email: "",
@@ -64,7 +71,6 @@ const review = ref({
 const events = ref([]);
 const baseApiUrl = "http://localhost:3000";
 
-// ⭐ Hàm cập nhật rating khi chọn sao
 const setRating = (value) => {
     review.value.rating = value;
 };
@@ -85,10 +91,15 @@ const fetchEventsModal = async () => {
 const submitReview = async () => {
     try {
         await axios.post(`${baseApiUrl}/reviews`, review.value);
-        alert("Gửi đánh giá thành công!");
-        emit("close");
+        console.log("Before toastr call");
+        toastr.success("Gửi đánh giá thành công!");
+        console.log("After toastr call");
+        setTimeout(() => {
+            emit("close"); // Đóng modal sau khi thông báo hiển thị
+        }, 500); // Đợi 500ms để đảm bảo thông báo hiển thị
     } catch (error) {
         console.error("Lỗi khi gửi đánh giá:", error);
+        toastr.error("Có lỗi xảy ra khi gửi đánh giá!");
     }
 };
 
@@ -107,13 +118,12 @@ watch(
 </script>
 
 <style scoped>
-/* Overlay nền tối */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    right: 0;
+    bottom: 0;
     background: rgba(0, 0, 0, 0.6);
     display: flex;
     justify-content: center;
@@ -121,117 +131,65 @@ watch(
     z-index: 1000;
 }
 
-/* Nội dung modal */
 .modal-content {
-    background: white;
-    width: 700px; /* 📌 Tăng kích thước modal */
-    max-width: 95%;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    animation: fadeIn 0.3s ease-in-out;
-}
-
-/* Header với màu cam */
-.modal-header {
-    background: #ff7f00;
-    color: white;
+    background: #fff;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
     padding: 20px;
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Body của form */
-.modal-body {
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-}
-
-.modal-body label {
-    font-weight: bold;
-    margin: 14px 0 6px;
-    font-size: 17px;
-}
-
-/* Điều chỉnh kích thước đánh giá sao */
-.modal-body .star-rating {
-    margin: 12px 0;
-    font-size: 24px;
-}
-
-/* Input và textarea */
-.modal-body input,
-.modal-body select,
-.modal-body textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 16px;
-}
-
-.modal-body textarea {
-    height: 120px;
-    resize: none;
-}
-
-/* Nút trong footer */
-.modal-footer {
+.modal-header {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
-    background: #f5f5f5;
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
+    align-items: center;
 }
 
-/* Nút gửi */
-.submit-btn {
-    background: #28a745;
-    color: white;
-    padding: 14px 20px;
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.submit-btn,
+.close-btn {
+    padding: 10px 20px;
     border: none;
-    border-radius: 8px;
+    border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
-    font-size: 18px;
-    transition: 0.3s;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.submit-btn {
+    background-color: #ff9800;
+    color: #fff;
 }
 
 .submit-btn:hover {
-    background: #218838;
+    background-color: #e68900;
     transform: scale(1.05);
 }
 
-/* Nút đóng */
 .close-btn {
-    background: #dc3545;
-    color: white;
-    padding: 14px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 18px;
-    transition: 0.3s;
+    background-color: #ccc;
+    color: #333;
 }
 
 .close-btn:hover {
-    background: #c82333;
+    background-color: #bbb;
     transform: scale(1.05);
 }
 
-/* Hiệu ứng xuất hiện modal */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+:deep(.toast) {
+    z-index: 99999 !important;
 }
 </style>
-
