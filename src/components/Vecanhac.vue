@@ -14,7 +14,7 @@
                     <i class="fas fa-map-marker-alt"></i> Hồ Chí Minh
                 </div>
                 <p class="price">VND 1.300.000 +</p>
-                <p>[english below] 1. thông tin chi tiết về giá vé &amp; lịch biểu diễn - chào show - chương trình nghệ thuật đặc sắc mới tại sài gòn . thời gian: 19:00 - 21:00 từ thứ 3 đến chủ nhật hàng tuần - địa điểm: chào show tại số 6 nguyên siêu, phường bến nghé, q1, tphcm. + giá vé chào show: 1,300,000 vnd/giá đã bao gồm thuế, đồ ăn và nước uống, rượu +) hotline hỗ trợ mua vé chào show: 08 999 80 818 - 0243 788 00 99 chương trình nghệ thuật đặc sắc chào show tôn vinh âm nhạc việt nam qua 30 nhạc cụ dân tộc độc đáo, có thể nói là dân nhạc cụ độc đáo đầy đủ và độc lạ nhất hiện nay trong nước, mà c...</p>
+                <p>1. thông tin chi tiết về giá vé &amp; lịch biểu diễn - chào show - chương trình nghệ thuật đặc sắc mới tại sài gòn . thời gian: 19:00 - 21:00 từ thứ 3 đến chủ nhật hàng tuần - địa điểm: chào show tại số 6 nguyên siêu, phường bến nghé, q1, tphcm. + giá vé chào show: 1,300,000 vnd/giá đã bao gồm thuế, đồ ăn và nước uống, rượu +) hotline hỗ trợ mua vé chào show: 08 999 80 818 - 0243 788 00 99 chương trình nghệ thuật đặc sắc chào show tôn vinh âm nhạc việt nam qua 30 nhạc cụ dân tộc độc đáo, có thể nói là dân nhạc cụ độc đáo đầy đủ và độc lạ nhất hiện nay trong nước, mà c...</p>
             </div>
             <button class="buy-now" @click="openModal">ĐẶT VÉ NGAY</button>
         </div>
