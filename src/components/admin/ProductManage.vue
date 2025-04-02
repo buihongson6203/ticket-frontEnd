@@ -5,13 +5,13 @@
         <main>
             <div class="head-title">
                 <div class="left">
-                    <h1>Product Manage</h1>
+                    <h1>Event Manage</h1>
                 </div>
             </div>
             <div class="table-data">
                 <div class="order">
                     <div class="head">
-                        <h3>Product Manage</h3>
+                        <h3>Event Manage</h3>
                         <router-link class="btn-create" to="/admin/create_product">Create</router-link>
                     </div>
                     <form @submit.prevent="onSearchClick">
@@ -29,20 +29,20 @@
                                 <th>Price</th>
                                 <th>Description</th>
                                 <th>Category</th>
-                                <th>Bar Code</th>
+                                <th>Total Tickets</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="p in productData" :key="p.id" style="text-align: center;">
                                 <td>{{ p.id }}</td>
-                                <td>{{ p.productName }}</td>
-                                <td><img class="img-manage" :src="p.imageProduct"
+                                <td>{{ p.title }}</td>
+                                <td><img class="img-manage" :src="p.image"
                                         style="width:90px; height: 60px; border-radius: 0;"></td>
                                 <td>{{ p.price }}</td>
                                 <td>{{ p.description }}</td>
-                                <td>{{ p.categoryName }}</td>
-                                <td>{{ p.barCode }}</td>
+                                <td>{{ p.category.name }}</td>
+                                <td>{{ p.totalTickets }}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                         <button type="button" class="btn-update"
@@ -127,11 +127,11 @@ export default {
             totalItems: 0,
             showUpdateModal: false,
             currentProduct: {
-                productName: "",
-                imageProduct: null,
+                title: "",
+                image: null,
                 price: "",
                 description: "",
-                barCode: "",
+                totalTickets: "",
                 categoryId: ""
             },
             categories: []
@@ -148,9 +148,9 @@ export default {
     },
     methods: {
         loadProductData() {
-            var url = process.env.VUE_APP_BASE_API_URL + `/Products/GetAll`;
+            var url = process.env.VUE_APP_BASE_API_URL + `/events`;
             axios.get(url).then((response) => {
-                this.totalItems = response.data.length;
+                this.totalItems = response.data.data.length;
                 this.totalPages = Math.floor(this.totalItems / this.pageSize);
                 if (this.totalItems % this.pageSize !== 0) {
                     this.totalPages++;
@@ -159,7 +159,7 @@ export default {
                 let startIndex = (this.currentPage - 1) * this.pageSize;
                 let endIndex = this.currentPage * this.pageSize;
 
-                this.productData = response.data.slice(startIndex, endIndex).map(product => {
+                this.productData = response.data.data.slice(startIndex, endIndex).map(product => {
                     const category = this.categories.find(cat => cat.id === product.categoryId);
                     return {
                         ...product,
@@ -182,7 +182,7 @@ export default {
             if (this.searchKeyword.trim() === '') {
                 this.loadProductData();
             } else {
-                var url = process.env.VUE_APP_BASE_API_URL + `/Products/fullFilter`;
+                var url = process.env.VUE_APP_BASE_API_URL + `/events`;
                 var requestData = {
                     filterParams: [
                         {
