@@ -46,7 +46,7 @@ a:nth-child(7) {
 }
 
 form {
-    max-width: 400px;
+    min-width: 400px;
     width: 100%;
     margin-right: auto;
     margin-bottom: 30px;

@@ -18,6 +18,8 @@ import DetailEvent from './views/DetailEvent.vue';
 import WeeklyEvents from './views/WeeklyEvents.vue';
 import TintucView from './views/TintucView.vue';
 import Vecanhac from './components/Vecanhac.vue';
+import ReviewsManage from './components/admin/ReviewsManage.vue';
+import ReviewsManageView from './views/admin/ReviewsManageView.vue';
 
 
 
@@ -75,6 +77,12 @@ const routes = [
         path: '/admin/ordermanage',
         name: 'OrderManageView',
         component: OrderManageView,
+        meta: { requiresAuth: true }
+    },
+    {
+        path: '/admin/reviews',
+        name: 'ReviewManageView',
+        component: ReviewsManageView,
         meta: { requiresAuth: true }
     },
     {
