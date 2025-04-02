@@ -38,8 +38,10 @@
                                 <td>{{ c.name }}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" class="btn-update" @click="openUpdateModal(c)">Update</button>
-                                        <button type="button" class="btn-delete" @click="onDeleteClick(c.id)">Delete</button>
+                                        <button type="button" class="btn-update"
+                                            @click="openUpdateModal(c)">Update</button>
+                                        <button type="button" class="btn-delete"
+                                            @click="onDeleteClick(c.id)">Delete</button>
                                     </div>
                                 </td>
                             </tr>
@@ -180,17 +182,31 @@ export default {
             this.showUpdateModal = false;
         },
         updateCategory() {
-            var url = process.env.VUE_APP_BASE_API_URL + `/Categories/Update`;
-            axios.put(url, this.currentCategory)
+            if (!this.currentCategory.id) {
+                console.error('Category ID is missing!');
+                return;
+            }
+
+            // Cấu trúc dữ liệu đúng với API
+            const updateData = {
+                name: this.currentCategory.categoryName,  // Đổi `categoryName` thành `name`
+            };
+
+            // URL chính xác với `id`
+            const url = `${process.env.VUE_APP_BASE_API_URL}/categories/${this.currentCategory.id}`;
+
+            axios.patch(url, updateData)
                 .then(response => {
                     this.showUpdateModal = false;
                     this.success();
-                    this.loadCategoryData();
+                    this.loadCategoryData(); // Reload dữ liệu
                 })
                 .catch(error => {
                     console.error('Error updating category:', error);
+                    toast.error("Error updating category. Please try again.");
                 });
         },
+
         onDeleteClick(categoryId) {
             if (confirm("Are you sure you want to delete this category?")) {
                 var url = process.env.VUE_APP_BASE_API_URL + `/Categories/${categoryId}`;
