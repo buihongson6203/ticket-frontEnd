@@ -37,6 +37,12 @@
                     <router-link to="/admin/ordermanage" class="text">Order Manage</router-link>
                 </a>
             </li>
+            <li>
+                <a href="#">
+                    <i class='bx icon fa fa-dashboard'></i>
+                    <router-link to="/admin/reviews" class="text">Reviews Manage</router-link>
+                </a>
+            </li>
         </ul>
         <ul class="side-menu">
             <li>
