@@ -37,8 +37,11 @@
                             <tr v-for="p in productData" :key="p.id" style="text-align: center;">
                                 <td>{{ p.id }}</td>
                                 <td>{{ p.title }}</td>
-                                <td><img class="img-manage" :src="p.image"
-                                        style="width:90px; height: 60px; border-radius: 0;"></td>
+                                <td>
+                                    <img class="img-manage" :src="`${baseApiUrl}${p.image}`"
+                                        style="width:90px; height: 60px; border-radius: 0;">
+                                </td>
+
                                 <td>{{ p.price }}</td>
                                 <td>{{ p.description }}</td>
                                 <td>{{ p.category.name }}</td>
@@ -119,6 +122,7 @@ export default {
     },
     data() {
         return {
+            baseApiUrl: process.env.VUE_APP_BASE_API_URL || "http://localhost:3000",
             productData: [],
             searchKeyword: '',
             pageSize: 3,
@@ -288,5 +292,4 @@ export default {
 <style scoped>
 @import '@/assets/style.css';
 @import '@/assets/pagination.css';
-
 </style>
