@@ -20,6 +20,8 @@ import TintucView from './views/TintucView.vue';
 import Vecanhac from './components/Vecanhac.vue';
 import ReviewsManage from './components/admin/ReviewsManage.vue';
 import ReviewsManageView from './views/admin/ReviewsManageView.vue';
+import TicketsManageView from './views/admin/TicketsManageView.vue';
+import CreateTicketManageView from './views/admin/CreateTicketManageView.vue';
 
 
 
@@ -86,6 +88,12 @@ const routes = [
         meta: { requiresAuth: true }
     },
     {
+        path: '/admin/tickets',
+        name: 'TicketsManageView',
+        component: TicketsManageView,
+        meta: { requiresAuth: true }
+    },
+    {
         path: '/admin/orderdetailsmanage/:billId',
         name: 'OrderDetailsManageView',
         component: OrderDetailsManageView,
@@ -96,6 +104,12 @@ const routes = [
         path: '/admin/create_category',
         name: 'CreateCategoryView',
         component: CreateCategoryView,
+        meta: { requiresAuth: true }
+    },
+    {
+        path: '/admin/create_ticket',
+        name: 'CreateTicketView',
+        component: CreateTicketManageView,
         meta: { requiresAuth: true }
     },
     {

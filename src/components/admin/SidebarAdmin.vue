@@ -16,6 +16,12 @@
             <li>
                 <a href="#">
                     <i class='bx icon fa fa-dashboard'></i>
+                    <router-link  class="text" to="/admin/tickets">Tickets Manage</router-link>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx icon fa fa-dashboard'></i>
                     <router-link  class="text" to="/admin/productmanage">Event Manage</router-link>
                 </a>
             </li>

@@ -4,7 +4,6 @@
       <button class="close-btn" @click="close">×</button>
       <h2>Thanh Toán Vé</h2>
 
-      <!-- Thông tin khách hàng -->
       <div class="customer-info">
         <h3>THÔNG TIN KHÁCH HÀNG / CUSTOMER INFORMATION</h3>
         <input type="text" v-model="customer.name" placeholder="Họ tên / Fullname" />
@@ -14,7 +13,6 @@
         <input type="date" v-model="customer.date" placeholder="Ngày xem show/sự kiện" />
       </div>
 
-      <!-- Lựa chọn thanh toán -->
       <div class="payment-method">
         <h3>LỰA CHỌN THANH TOÁN / PAYMENT METHOD</h3>
         <label>
@@ -78,7 +76,7 @@ export default {
     },
     eventId: {
       type: Number,
-      default: 1
+      default: 2
     }
   },
 
@@ -194,6 +192,11 @@ export default {
   watch: {
     isOpen(newVal) {
       if (newVal) {
+        this.fetchEventTickets();
+      }
+    },
+    eventId(newEventId) {
+      if (this.isOpen) {
         this.fetchEventTickets();
       }
     }

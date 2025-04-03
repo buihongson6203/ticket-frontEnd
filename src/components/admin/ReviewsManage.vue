@@ -18,7 +18,8 @@
                     </div>
                     <div class="button-group-reviews">
                         <button type="submit" class="search-btn-reviews">Tìm kiếm</button>
-                        <button type="button" class="clear-btn-reviews" @click="clearSearch"><i class="fa fa-times"></i> Clear</button>
+                        <button type="button" class="clear-btn-reviews" @click="clearSearch"><i class="fa fa-times"></i>
+                            Clear</button>
                     </div>
                 </div>
             </form>
@@ -47,8 +48,10 @@
                                 <td>{{ formatDate(review.reviewDate) }}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" class="btn-update" @click="openUpdateModal(review)">Update</button>
-                                        <button type="button" class="btn-delete" @click="onDeleteClick(review.reviewDate)">Delete</button>
+                                        <button type="button" class="btn-update"
+                                            @click="openUpdateModal(review)">Update</button>
+                                        <button type="button" class="btn-delete"
+                                            @click="onDeleteClick(review.reviewDate)">Delete</button>
                                     </div>
                                 </td>
                             </tr>
@@ -215,6 +218,7 @@ export default {
 <style scoped>
 @import '@/assets/style.css';
 @import '@/assets/pagination.css';
+
 /* Định dạng chung cho form tìm kiếm */
 .search-form-reviews {
     display: flex;
@@ -305,6 +309,4 @@ export default {
         justify-content: center;
     }
 }
-
-
 </style>

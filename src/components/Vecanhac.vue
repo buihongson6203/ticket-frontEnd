@@ -105,7 +105,7 @@ export default {
         const fetchEvents = async () => {
             try {
                 const response = await axios.get(
-                    `${baseApiUrl}/categories/list?categoryName=vanhoa`
+                    `${baseApiUrl}/categories/list?bundleName=canhac`
                 );
 
                 const fetchedEvents = response.data.data?.[0]?.events ?? [];
