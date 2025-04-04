@@ -1,10 +1,7 @@
 <template>
     <SidebarAdmin />
-    <!-- CONTENT -->
     <section id="content">
         <NavbarAdmin />
-
-        <!-- MAIN -->
         <main>
             <div class="head-title">
                 <div class="left">
@@ -17,33 +14,46 @@
                     <div class="head">
                         <h3>Order Manage</h3>
                     </div>
-                    <form @submit.prevent="onSearchClick">
+                    <form @submit.prevent="onSearchClick" class="search-form">
                         <div class="form-input">
-                            <input type="search" placeholder="Search..." v-model="searchKeyword">
+                            <input type="text" placeholder="User Name" v-model="searchParams.userName">
+                            <input type="text" placeholder="Email" v-model="searchParams.email">
+                            <input type="text" placeholder="Event Name" v-model="searchParams.eventName">
+                            <select v-model="searchParams.status">
+                                <option value="">All Status</option>
+                                <option value="pending">Pending</option>
+                                <option value="completed">Completed</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                            <select v-model="searchParams.sortType">
+                                <option value="ASC">Sort ASC</option>
+                                <option value="DESC">Sort DESC</option>
+                            </select>
                             <button type="submit" class="search-btn"><i class='fa fa-search'></i></button>
                         </div>
                     </form>
                     <table>
                         <thead>
                             <tr class="header-text">
-                                <th>BillId</th>
-                                <th>BillDate</th>
-                                <th>CustomerName</th>
-                                <th>PhoneNumber</th>
-                                <th>Address</th>
+                                <th>Date</th>
+                                <th>Email</th>
+                                <th>Event</th>
+                                <th>Total Price</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="o in orderData" :key="o.id" style="text-align: center;">
-                                <td>{{ o.billId }}</td>
-                                <td>{{ o.billDate }}</td>
-                                <td>{{ o.customerFullName }}</td>
-                                <td>{{ o.customerPhoneNumber }}</td>
-                                <td>{{ o.customerAddress }}</td>
+                                <td>{{ formatDate(o.createdAt) }}</td>
+                                <td>{{ o.user?.name }}</td>
+                                <td>{{ o.user?.email }}</td>
+                                <td>{{ o.event?.title }}</td>
+                                <td>{{ o.totalPrice }}</td>
+                                <td>{{ o.payments?.[0]?.status || 'N/A' }}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" class="btn-update" @click="viewDetails(o.billId)">View Details</button>
+                                        <button type="button" class="btn-update" @click="viewDetails(o.id)">View Details</button>
                                     </div>
                                 </td>
                             </tr>
@@ -52,8 +62,8 @@
                     <div class="pagination_section" style="margin-top: 30px;">
                         <a href="#" style="font-weight: bold;" @click="previousPage">
                             << Previous </a>
-                                <div class="a-number" v-for="page in Math.ceil(totalItems / pageSize)" :key="page">
-                                    <a href="#" title="Algorithm" @click="changePage(page)">
+                                <div class="a-number" v-for="page in totalPages" :key="page">
+                                    <a href="#" :class="{ active: page === currentPage }" @click="changePage(page)">
                                         {{ page }}
                                     </a>
                                 </div>
@@ -64,10 +74,7 @@
                 </div>
             </div>
         </main>
-
-        <!-- MAIN -->
     </section>
-    <!-- CONTENT -->
 </template>
 
 <script>
@@ -78,24 +85,25 @@ import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
 export default {
-    name: 'CategoryManage',
+    name: 'OrderManage',
     components: {
         SidebarAdmin, NavbarAdmin
     },
     data() {
         return {
             orderData: [],
-            searchKeyword: '',
-            pageSize: 3,
+            searchParams: {
+                userName: '',
+                email: '',
+                eventName: '',
+                status: '',
+                sortType: 'ASC'
+            },
+            pageSize: 10,
             currentPage: 1,
             totalPages: 0,
-            totalItems: 0,
-            showUpdateModal: false,
-            currentOrder: {
-                id: null,
-                categoryName: ''
-            }
-        }
+            totalItems: 0
+        };
     },
     setup() {
         const success = () => {
@@ -103,50 +111,39 @@ export default {
                 autoClose: 1000,
                 type: "success"
             });
-        }
+        };
         return { success };
     },
     methods: {
-        loadOrderData() {
-            var url = process.env.VUE_APP_BASE_API_URL + `/Customers/GetCustomerAndBill`;
-            axios.get(url).then((response) => {
-                this.totalItems = response.data.length;
-                this.totalPages = Math.ceil(this.totalItems / this.pageSize);
-
-                let startIndex = (this.currentPage - 1) * this.pageSize;
-                let endIndex = this.currentPage * this.pageSize;
-
-                this.orderData = response.data.slice(startIndex, endIndex);
-            }).catch((error) => {
-                console.log(error.response);
-            })
-        },
-        onSearchClick() {
-            if (this.searchKeyword.trim() === '') {
-                this.loadOrderData();
-            } else {
-                var url = process.env.VUE_APP_BASE_API_URL + `/Customers/fullFilter`;
-                var requestData = {
-                    filterParams: [
-                        {
-                            colName: "customerName",
-                            _operator: "like",
-                            value: this.searchKeyword
-                        }
-                    ]
+        async loadOrderData() {
+            try {
+                const params = {
+                    sortType: this.searchParams.sortType,
+                    userName: this.searchParams.userName,
+                    email: this.searchParams.email,
+                    eventName: this.searchParams.eventName,
+                    status: this.searchParams.status,
+                    page: this.currentPage,
+                    size: this.pageSize
                 };
 
-                axios.post(url, requestData)
-                    .then(response => {
-                        this.orderData = response.data;
-                        this.totalItems = this.orderData.length;
-                        this.totalPages = Math.ceil(this.totalItems / this.pageSize);
-                        this.currentPage = 1;
-                    })
-                    .catch(error => {
-                        console.error('Lỗi khi tìm kiếm danh mục:', error);
-                    });
+                const response = await axios.get('http://localhost:3000/orders/list-order', {
+                    params,
+                    headers: { 'accept': '*/*' }
+                });
+
+                this.orderData = response.data.data;
+                this.totalItems = response.data.total;
+                this.totalPages = Math.ceil(this.totalItems / this.pageSize);
+            } catch (error) {
+                toast.error('Error loading orders: ' + (error.response?.data?.message || error.message), {
+                    autoClose: 3000
+                });
             }
+        },
+        onSearchClick() {
+            this.currentPage = 1;
+            this.loadOrderData();
         },
         changePage(page) {
             this.currentPage = page;
@@ -164,19 +161,57 @@ export default {
                 this.loadOrderData();
             }
         },
-        viewDetails(billId) {
-            console.log(billId);
-            this.$router.push({ name: 'OrderDetailsManageView', params: { billId } });
+        viewDetails(orderId) {
+            this.$router.push({ name: 'OrderDetailsManageView', params: { billId: orderId } });
+        },
+        formatDate(dateString) {
+            return new Date(dateString).toLocaleDateString('vi-VN');
         }
     },
     mounted() {
         this.loadOrderData();
         import('../../assets/script');
     }
-}
+};
 </script>
 
 <style scoped>
 @import '@/assets/style.css';
 @import '@/assets/pagination.css';
+
+.search-form .form-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.search-form input,
+.search-form select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    flex: 1;
+    min-width: 150px;
+}
+
+.search-form .search-btn {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search-form .search-btn:hover {
+    background-color: #0056b3;
+}
+
+.pagination_section .a-number a.active {
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    padding: 2px 8px;
+}
 </style>
