@@ -93,23 +93,18 @@ export default {
         const openModal = (eventId) => {
             console.log("Mở modal với eventId:", eventId);
             selectedEventId.value = eventId;
-            
             isModalOpen.value = true;
         };
 
-        // Hàm đóng modal
         const closeModal = () => {
             console.log("Đóng modal");
             isModalOpen.value = false;
             selectedEventId.value = null;
         };
 
-        // Hàm chuyển hướng đến trang chi tiết sự kiện
-        const goToEventDetail = (eventId) => {
-            router.push(`/event/${eventId}`);
-        };
+        
 
-        // Hàm lấy sự kiện từ API
+
         const fetchEvents = async () => {
             try {
                 const response = await axios.get(`${baseApiUrl}/categories/list?bundleName=vanhoa`);
@@ -124,6 +119,9 @@ export default {
             } catch (error) {
                 console.error("Lỗi khi gọi API:", error);
             }
+        };
+        const goToEventDetail = (eventId) => {
+            router.push(`/event/${eventId}`);
         };
 
         onMounted(fetchEvents);

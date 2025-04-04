@@ -7,7 +7,7 @@ import ForgotPasswordView from './views/ForgotPasswordView.vue';
 import DashboardView from './views/admin/DashboardView.vue';
 import LoginAdminView from './views/admin/LoginAdminView.vue';
 import CreateProductView from './views/admin/CreateProductView.vue';
-import ProductManageView from './views/admin/ProductManageView.vue';
+import ProductManageView from './views/admin/EventManageView.vue';
 import CategoryManageView from './views/admin/CategoryManageView.vue';
 import CustomerManageView from './views/admin/CustomerManageView.vue';
 import OrderManageView from './views/admin/OrderManageView.vue';
@@ -22,6 +22,7 @@ import ReviewsManage from './components/admin/ReviewsManage.vue';
 import ReviewsManageView from './views/admin/ReviewsManageView.vue';
 import TicketsManageView from './views/admin/TicketsManageView.vue';
 import CreateTicketManageView from './views/admin/CreateTicketManageView.vue';
+import EventManageView from './views/admin/EventManageView.vue';
 
 
 
@@ -58,9 +59,9 @@ const routes = [
         meta: { requiresAuth: true }
     },
     {
-        path: '/admin/productmanage',
-        name: 'ProductManageView',
-        component: ProductManageView,
+        path: '/admin/eventmanage',
+        name: 'EventManageView',
+        component: EventManageView,
         meta: { requiresAuth: true }
     },
     {

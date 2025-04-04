@@ -1,16 +1,16 @@
 <template>
     <div class="home">
-      <ProductManage />
+      <EventManage />
     </div>
   </template>
   
   <script>
-  import ProductManage from '@/components/admin/ProductManage.vue';
+  import EventManage from '@/components/admin/EventManage.vue';
   
   export default {
-    name: 'ProductManageView',
+    name: 'EventManageView',
       components: {
-        ProductManage
+        EventManage
       }
   }
   </script>

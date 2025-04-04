@@ -7,10 +7,8 @@
       <div class="customer-info">
         <h3>THÔNG TIN KHÁCH HÀNG / CUSTOMER INFORMATION</h3>
         <input type="text" v-model="customer.name" placeholder="Họ tên / Fullname" />
-        <input type="text" v-model="customer.phone" placeholder="Điện thoại / Phone" />
         <input type="email" v-model="customer.email" placeholder="Email" />
         <input type="text" v-model="customer.address" placeholder="Địa chỉ / Address" />
-        <input type="date" v-model="customer.date" placeholder="Ngày xem show/sự kiện" />
       </div>
 
       <div class="payment-method">
@@ -25,7 +23,6 @@
         </label>
       </div>
 
-      <!-- Giỏ hàng -->
       <div class="shopping-cart">
         <h3>GIỎ HÀNG CỦA BẠN / SHOPPING CART</h3>
         <div v-for="ticket in ticketTypes" :key="ticket.id" class="cart-item">
@@ -39,12 +36,10 @@
         </div>
       </div>
 
-      <!-- Tổng cộng -->
       <div class="total">
         <h3>Tổng cộng / Total: {{ totalPriceFormatted }} VND</h3>
       </div>
 
-      <!-- Xác nhận thanh toán -->
       <div class="confirm">
         <label>
           <input type="checkbox" v-model="agreeTerms" />
@@ -55,10 +50,12 @@
         </button>
       </div>
 
-      <!-- Hiển thị mã QR nếu có -->
       <div v-if="qrCodeUrl" class="qr-code">
         <h3>Mã QR Thanh Toán</h3>
         <img :src="qrCodeUrl" alt="QR Code" />
+        <button @click="completePayment" class="complete-btn">
+          Tôi đã hoàn tất thanh toán
+        </button>
       </div>
     </div>
   </div>
@@ -66,6 +63,8 @@
 
 <script>
 import axios from 'axios';
+import toastr from 'toastr'; // 直接导入 toastr
+import 'toastr/build/toastr.min.css'; // 导入 CSS
 
 export default {
   name: 'PaymentModal',
@@ -92,7 +91,8 @@ export default {
       selectedPayment: 'vietqr',
       ticketTypes: [],
       agreeTerms: false,
-      qrCodeUrl: null
+      qrCodeUrl: null,
+      isLoading: false
     };
   },
   computed: {
@@ -119,13 +119,12 @@ export default {
       try {
         const url = `${process.env.VUE_APP_BASE_API_URL}/events/events-tickets/${this.eventId}`;
         const response = await axios.get(url);
-
         this.ticketTypes = response.data.ticketTypes.map(ticket => ({
           ...ticket,
           quantitySelected: 0
         }));
       } catch (error) {
-        console.error('Error fetching event tickets:', error);
+        toastr.error('Không thể tải danh sách vé: ' + (error.response?.data?.message || error.message));
       }
     },
     formatPrice(price) {
@@ -134,6 +133,8 @@ export default {
     increaseQuantity(ticket) {
       if (ticket.quantitySelected < ticket.maxPerOrder && ticket.quantitySelected < ticket.quantity) {
         ticket.quantitySelected++;
+      } else {
+        toastr.warning(`Số lượng tối đa cho ${ticket.name} là ${ticket.maxPerOrder}`);
       }
     },
     decreaseQuantity(ticket) {
@@ -141,9 +142,16 @@ export default {
         ticket.quantitySelected--;
       }
     },
-
     async processPayment() {
-      if (!this.agreeTerms) return;
+      if (!this.agreeTerms) {
+        toastr.warning('Vui lòng đồng ý với điều khoản và chính sách');
+        return;
+      }
+
+      if (!this.customer.email || !this.customer.name) {
+        toastr.warning('Vui lòng điền đầy đủ họ tên và email');
+        return;
+      }
 
       const paymentData = {
         customer: this.customer,
@@ -152,6 +160,12 @@ export default {
         total: this.totalPrice
       };
 
+      if (paymentData.tickets.length === 0) {
+        toastr.warning('Vui lòng chọn ít nhất một vé');
+        return;
+      }
+
+      this.isLoading = true;
       if (this.selectedPayment === 'vietqr') {
         try {
           const response = await axios.post('https://api.vietqr.io/v2/generate', {
@@ -171,21 +185,67 @@ export default {
 
           if (response.data.code === "00") {
             this.qrCodeUrl = response.data.data.qrDataURL;
+            toastr.success('Tạo mã QR thành công');
           } else {
-            console.error('Error generating QR code:', response.data.desc);
-            alert('Có lỗi khi tạo mã QR. Vui lòng thử lại.');
+            toastr.error('Lỗi khi tạo mã QR: ' + response.data.desc);
           }
         } catch (error) {
-          console.error('Error calling VietQR API:', error);
-          alert('Có lỗi khi gọi API VietQR. Vui lòng thử lại.');
+          toastr.error('Lỗi khi gọi API VietQR: ' + (error.response?.data?.message || error.message));
         }
       } else if (this.selectedPayment === 'tindung') {
-        console.log('Processing credit card payment:', paymentData);
-        // Thêm logic xử lý thanh toán thẻ tín dụng ở đây
+        toastr.info('Chức năng thanh toán thẻ tín dụng đang phát triển');
       }
+      this.isLoading = false;
+    },
+    async completePayment() {
+      const selectedTickets = this.ticketTypes.filter(ticket => ticket.quantitySelected > 0);
+
+      const formData = new FormData();
+      formData.append('email', this.customer.email);
+      formData.append('name', this.customer.name);
+      formData.append('eventId', this.eventId.toString());
+      formData.append('totalPrice', this.totalPrice.toString());
+      formData.append('status', 'pending');
+      formData.append('orderItems', JSON.stringify(selectedTickets.map(ticket => ({
+        ticketTypeId: ticket.id,
+        quantity: ticket.quantitySelected,
+        price: ticket.price
+      }))));
+
+      this.isLoading = true;
+      try {
+        const response = await axios.post(
+          'http://localhost:3000/orders/create-order',
+          formData,
+          {
+            headers: {
+              'accept': '*/*',
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+        );
+
+        if (response.status === 201 || response.status === 200) {
+          toastr.success('Đặt vé thành công! Vui lòng chờ admin phê duyệt,bạn sẽ nhận được email sau khi phê duyệt');
+          this.close();
+        }
+      } catch (error) {
+        const errorMessage = error.response?.data?.message || error.message;
+        if (error.response?.data?.errors) {
+          error.response.data.errors.forEach(err => {
+            toastr.error(err.message || err);
+          });
+        } else {
+          toastr.error('Lỗi khi tạo đơn hàng: ' + errorMessage);
+        }
+      }
+      this.isLoading = false;
     },
     close() {
-      this.qrCodeUrl = null; // Reset mã QR khi đóng modal
+      this.qrCodeUrl = null;
+      this.customer = { name: '', phone: '', email: '', address: '', date: '' };
+      this.agreeTerms = false;
+      this.ticketTypes.forEach(ticket => ticket.quantitySelected = 0);
       this.$emit('close');
     }
   },
@@ -205,204 +265,30 @@ export default {
     if (this.isOpen) {
       this.fetchEventTickets();
     }
+    // Cấu hình toastr
+    toastr.options = {
+      positionClass: 'toast-top-right',
+      timeOut: 5000,
+      closeButton: true,
+      progressBar: true
+    };
   }
 };
 </script>
-
 <style scoped>
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
+@import "../../assets/modal/thanhtoan.css";
 
-.modal-content {
-  background: #fff;
-  border-radius: 8px;
-  width: 80%;
-  /* Mở rộng modal hơn để mọi thứ cân đối */
-  max-width: 1000px;
-  /* Đảm bảo modal không quá rộng */
-  padding: 35px;
-  /* Tăng padding để nội dung thoáng hơn */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  position: relative;
-  animation: fadeIn 0.3s ease;
-}
-
-.modal-body {
-  display: flex;
-  gap: 30px;
-}
-
-
-.left-section,
-.right-section {
-  flex: 1;
-}
-
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: transparent;
+/* .complete-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
   border: none;
-  font-size: 24px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.customer-info,
-.payment-method,
-.shopping-cart,
-.total,
-.confirm {
-  margin-bottom: 20px;
-}
-
-.h2 {
-  font-size: 22px;
-  /* Tăng kích thước để nổi bật hơn */
-  font-weight: bold;
-  text-align: center;
-  /* Căn giữa tiêu đề */
-  letter-spacing: 1px;
-  /* Làm tiêu đề rõ ràng hơn */
-  text-transform: uppercase;
-  /* Viết hoa để nổi bật */
-}
-
-.h3 {
-  font-size: 13px;
-  font-weight: bold;
-  color: #333;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="date"] {
-  display: block;
-  width: 100%;
-  /* Input full width trong cột */
-  margin: 10px 0;
-  /* Canh lề đẹp hơn */
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
-input[type="radio"] {
-  margin-right: 10px;
-}
-
-.payment-method label {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 16px;
-  /* Tăng kích thước chữ để dễ đọc hơn */
-}
-
-.cart-item {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  /* Cân chỉnh lại bố cục để tránh mất cân đối */
-  align-items: center;
-  padding: 12px 0;
-}
-
-.cart-item input {
-  width: 50px;
-  text-align: center;
-}
-
-.cart-item .quantity {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.cart-item .quantity button {
-  width: 32px;
-  height: 32px;
-  background: #ff7f00;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.cart-item .quantity button:hover {
-  background: #d17a00;
-}
-
-
-.confirm-btn {
-  background: orange;
-  color: #fff;
-  border: none;
-  padding: 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 18px;
-  /* Tăng kích thước nút để dễ thao tác hơn */
-  display: block;
-  width: 100%;
-  text-align: center;
-  transition: background 0.3s ease;
-  /* Thêm hiệu ứng hover */
-}
-
-
-.confirm-btn:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-}
-
-.confirm a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-.confirm a:hover {
-  text-decoration: underline;
-}
-
-.confirm-btn:hover {
-  background: #d17a00;
-}
-
-.qr-code {
-  text-align: center;
-}
-
-.qr-code img {
-  max-width: 100%;
-  height: auto;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
+.complete-btn:hover {
+  background-color: #218838;
+} */
 </style>
