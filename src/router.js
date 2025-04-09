@@ -23,6 +23,8 @@ import ReviewsManageView from './views/admin/ReviewsManageView.vue';
 import TicketsManageView from './views/admin/TicketsManageView.vue';
 import CreateTicketManageView from './views/admin/CreateTicketManageView.vue';
 import EventManageView from './views/admin/EventManageView.vue';
+import Dulich from './components/dulich.vue';
+import Vethamquan from './components/Vethamquan.vue';
 
 
 
@@ -133,7 +135,16 @@ const routes = [
         name: 'vanhoanghethuat',
         component: Vanhoanghethuat
     },
-
+    {
+        path: '/dulich',
+        name: 'dulich',
+        component: Dulich
+    },
+    {
+        path: '/vethamquan',
+        name: 'vethamquan',
+        component: Vethamquan
+    },
     {
         path: '/weekly-events',
         name: 'WeeklyEvents',

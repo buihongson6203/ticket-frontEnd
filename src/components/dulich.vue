@@ -4,7 +4,7 @@
     <div class="container">
         <!-- Sự kiện nổi bật -->
         <div class="breadcumd">
-            <Breadcrumb pageTitle="Văn hóa nghệ thuật" />
+            <Breadcrumb pageTitle="Du lịch" />
         </div>
 
         <div class="main-event" v-if="featuredEvent" @click="goToEventDetail(featuredEvent.id)" style="cursor: pointer;">
@@ -72,7 +72,7 @@ import ThanhToanModal from "./modal/thanhtoan-modal.vue";
 import Breadcrumb from "./Breadcrumb.vue";
 
 export default {
-    name: "van-hoanghethuat",
+    name: "dulich",
     components: {
         HeaderComponents,
         FooterComponents,
@@ -106,7 +106,7 @@ export default {
 
         const fetchEvents = async () => {
             try {
-                const response = await axios.get(`${baseApiUrl}/categories/list?bundleName=vanhoa`);
+                const response = await axios.get(`${baseApiUrl}/categories/list?bundleName=dulich`);
                 const fetchedEvents = response.data.data?.[0]?.events ?? [];
                 events.value = fetchedEvents;
 

@@ -35,8 +35,8 @@
             <div class="link-header">
                 <a href="http://localhost:8080/canhac">Vé ca nhạc</a>
                 <a href="http://localhost:8080/vanhoa">Văn hóa nghệ thuật</a>
-                <a href="#">Du lịch</a>
-                <a href="#">Vé tham quan</a>
+                <a href="http://localhost:8080/dulich">Du lịch</a>
+                <a href="http://localhost:8080/vethamquan">Vé tham quan</a>
                 <a href="http://localhost:8080/tintuc">Tin tức</a>
             </div>
             <div>

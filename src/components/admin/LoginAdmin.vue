@@ -1,21 +1,35 @@
 <template>
     <div class="login-container">
-        <div class="login-box">
-            <h2 class="login-title">Login Admin</h2>
-            <form class="login-form" @submit.prevent="login">
-                <div class="input-group">
-                    <input type="text" id="loginEmail" v-model="loginForm.email" placeholder="Email" required>
-                </div>
-                <div class="input-group">
-                    <input type="password" id="loginPassword" v-model="loginForm.password" placeholder="Password"
-                        required>
-                </div>
-                <button type="submit" class="login-btn">Login</button>
-                <div v-if="error" class="error-message">{{ error }}</div>
-            </form>
-        </div>
+      <div class="login-box">
+        <h2 class="login-title">Login Admin</h2>
+        <form class="login-form" @submit.prevent="login">
+          <div class="input-group">
+            <input
+              type="text"
+              id="loginEmail"
+              class="login-input"
+              v-model="loginForm.email"
+              placeholder="Email"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <input
+              type="password"
+              id="loginPassword"
+              class="login-input"
+              v-model="loginForm.password"
+              placeholder="Password"
+              required
+            />
+          </div>
+          <button type="submit" class="login-btn">Login</button>
+          <div v-if="error" class="error-message">{{ error }}</div>
+        </form>
+      </div>
     </div>
-</template>
+  </template>
+  
 <script>
 import axios from 'axios';
 
